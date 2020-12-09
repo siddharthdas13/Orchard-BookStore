@@ -1,0 +1,39 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+data-sly-call="${clientlib.css @ categories='aemCSSId.site'}"/>
+
+<sly data-sly-use.database="myPack.core.models.DatabaseModel"></sly>
+
+<section id="products" data-sly-list.book="${database.bookList}">
+	<section class="product-tile">
+    	<div class="product-block">
+        	<div class="image-block"> 
+           		<div class="product-image">
+                	<img src="/content/dam/aemContentFolder/english/A%20History%20Of%20India.jpg">
+                </div>
+				<div class="hover-block">
+                	<a href="http://www.google.com"><button class="add-to-cart" target="_blank">ADD TO CART</button></a>
+                    <a href="http://www.google.com"><button class="view-detail">VIEW DETAILS</button></a>
+                </div>
+                <div class="bestseller-label">
+                    <img src="https://www.sapnaonline.com/static/images/sapna/bestseller.svg">
+                </div>
+				<div class="discount-label">
+                   	<label>30%</label>
+                </div>
+            </div>
+            <div class="product-detail">
+               	<label><b>${book.name}</b></label>
+                <div class="hover-product-detail">
+                	<label class="creator"><i>by ${book.author}</i></label>
+                    <br>
+                    <label><b>Language</b></label>
+                    <label class="language"><i>${book.language}</i></label>
+                </div>
+                <label class="price">&#8377; ${book.price}/-</label>
+            </div>
+            <div class="new-product-label">
+               	<label>New</label>
+            </div>
+       </div>
+	</section>
+</section>
