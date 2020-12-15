@@ -1,0 +1,164 @@
+#products {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.product-tile {
+    flex: 0 0 280px;
+    margin: 100px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 5px 5px #D3D3D3;
+    width: 20%;
+}
+
+.product-block {
+    position: relative;
+    width: 250px;
+    height: 400px;
+    margin: 15px;
+}
+
+.image-block {
+   	width: inherit;
+}
+
+.product-image {
+    position: absolute;
+    width: inherit;
+    height: 300px;
+}
+
+.product-image img {
+    position: absolute;
+    width: inherit;
+    height: 300px;
+}
+
+.bestseller-label {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+}
+
+.discount-label {
+ 	position: absolute;
+    height: 45px;
+    width: 45px;
+    background-color: #4f66d1;
+    border-radius: 50%;
+    color: white;
+    top: -10px;
+    left: 215px;
+    font-size: 16px;
+}
+
+.discount-label label {
+    position: absolute;
+    top: 14px;
+    left: 7px;
+}
+
+.hover-block {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.80);
+    width: inherit;
+    height: 200px;
+    top: 0px;
+    left: 0px;
+    display: none;
+}
+
+.image-block:hover .hover-block {
+    display: block;
+}
+
+.add-to-cart {
+    position: absolute;
+    left: 0px;
+    margin: 25%;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 2px;
+    padding: 5px;
+    color: white;
+    width: 125px;
+    font-weight: bolder;
+}
+
+.view-detail {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    margin: 25%;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 2px;
+    padding: 5px;
+    color: white;
+    width: 125px;
+    font-weight: bolder;
+}
+
+.add-to-cart:hover, .view-detail:hover {
+    background-color: white;
+    color: black;
+}
+
+.product-detail {
+    position: absolute;
+    width: inherit;
+    height: 100px;
+    top: 300px;
+    left: 0px;
+    background-color: white;
+    padding-top: 10px;
+}
+
+.product-detail label {
+    display: block;
+    line-height: 1.5;
+}
+
+.hover-product-detail {
+    display: none;
+}
+
+.image-block:hover ~ .product-detail {
+    height: 200px;
+    top: 200px;
+}
+
+.image-block:hover ~ .product-detail > .hover-product-detail {
+    display: block;
+}
+
+.creator, .language {
+    color: gray;
+    font-family: roboto;
+    font-size: 16px;
+}
+
+.price {
+    color: #4f66d1;
+    float: right;
+    font-weight: bold;
+}
+
+.new-product-label {
+    position: absolute;
+    background-color: #4f66d1;
+    width: 280px;
+    height: 25px;
+    top: 386px;
+    left: -15px;
+    text-align: center;
+    padding-top: 4px;
+}
+
+.new-product-label label {
+    font-size: 18px;
+    color: white;
+}
