@@ -18,19 +18,13 @@ import com.orchard.obs.core.services.SideNavigationServices;
 
 @Component(service = {Servlet.class},
 			property = {
-						//"sling.servlet.resourceTypes=" + "wcm/foundation/components/page",
-						//"sling.servlet.selectors=" + "sample",
 						"sling.servlet.paths=/bin/BookByGenreServlet",
 		                "sling.servlet.extensions=json",
 		                "sling.servlet.methods=GET"
-						//"sling.servlet.path="+"bin/BookByCategoryServlet"
 		                })
 
 public class BookByGenreServlet extends SlingAllMethodsServlet {
 
-	/**
-	 * 
-	 */
 	@Reference
 	SideNavigationServices sideNavigationServices;
 	private static final long serialVersionUID = 1L;

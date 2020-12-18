@@ -1,11 +1,10 @@
-package com.orchard.obs.core.services;
+package com.orchard.obs.core.dao;
 
 import java.util.List;
 
-import com.orchard.obs.core.models.Book;;
+import com.orchard.obs.core.models.Book;
 
-public interface SideNavigationServices {
-
+public interface SideNavigationDao {
 	public List<String> getBookGenres(String dataSourceName);
 
 	public List<String> getBookPublishers(String dataSourceName);
@@ -13,5 +12,4 @@ public interface SideNavigationServices {
 	public List<Book> getBookBasedOnGenre(String dataSourceName, String genre);
 
 	public List<Book> getBookBasedOnPublisher(String dataSourceName, String publisher);
-
 }
