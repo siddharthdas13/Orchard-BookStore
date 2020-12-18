@@ -108,8 +108,10 @@ public class SideNavigationServices {
 			while (resultSet.next()) {
 				Book book = new Book();
 				book.setName(resultSet.getString("name"));
-				//book.setLanguage(resultSet.getString("languageId"));
+				book.setLanguage(resultSet.getString("language"));
 				book.setPrice(resultSet.getFloat("price"));
+				book.setAuthor(resultSet.getString("author"));
+				
 				books.add(book);
 			}
 		} catch (Exception e) {
@@ -128,28 +130,30 @@ public class SideNavigationServices {
 	}
 
 	public List<Book> getBookBasedOnPublisher(String dataSourceName, String publisher) {
-		Connection connection=getConnection(dataSourceName);
+		Connection connection = getConnection(dataSourceName);
 		Statement statement = null;
 		ResultSet resultSet = null;
-		List<Book> books=new ArrayList<>();
+		List<Book> books = new ArrayList<>();
 		try {
 			logger.error("Inside Connection, Source Is  {}", source);
 			statement = connection.createStatement();
-			String query="Select * FROM book inner join publisher on Book.publisherid=publisher.publisherid where publisher.publisherName='"+publisher+"'";
+			String query = "Select * FROM book inner join publisher on Book.publisherid=publisher.publisherid where publisher.publisherName='"
+					+ publisher + "'";
 			resultSet = statement.executeQuery(query);
 
 			while (resultSet.next()) {
-				Book book=new Book();
-				
+				Book book = new Book();
+
 				book.setName(resultSet.getString("name"));
-				//book.setLanguage(resultSet.getInt("languageId"));
+				book.setLanguage(resultSet.getString("language"));
 				book.setPrice(resultSet.getFloat("price"));
+				book.setAuthor(resultSet.getString("author"));
 				books.add(book);
-			} 
+			}
 		} catch (Exception e) {
 			logger.error("Error Occured  While Establishing The Connection : " + e);
-		}finally {
-				try {	
+		} finally {
+			try {
 				resultSet.close();
 				statement.close();
 				connection.close();

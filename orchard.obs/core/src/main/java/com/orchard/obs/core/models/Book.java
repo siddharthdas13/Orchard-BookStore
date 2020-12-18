@@ -3,7 +3,7 @@ package com.orchard.obs.core.models;
 public class Book {
 	private String name;
 	private float price;
-	private String author[];
+	private String author;
 	private String language;
 	
 	
@@ -11,7 +11,7 @@ public class Book {
 		super();
 	}
 
-	public Book(String name, float price, String[] author, String language) {
+	public Book(String name, float price, String author, String language) {
 		super();
 		this.name = name;
 		this.price = price;
@@ -50,14 +50,14 @@ public class Book {
 	/**
 	 * @return the author
 	 */
-	public String[] getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
 	/**
 	 * @param author the author to set
 	 */
-	public void setAuthor(String[] author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 

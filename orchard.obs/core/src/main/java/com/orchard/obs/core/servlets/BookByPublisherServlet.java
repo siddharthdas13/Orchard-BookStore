@@ -23,7 +23,6 @@ import com.orchard.obs.core.services.SideNavigationServices;
 						"sling.servlet.paths=/bin/BookByPublisherServlet",
 		                "sling.servlet.extensions=json",
 		                "sling.servlet.methods=GET"
-						//"sling.servlet.path="+"bin/BookByCategoryServlet"
 		                })
 
 public class BookByPublisherServlet extends SlingAllMethodsServlet {
