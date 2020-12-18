@@ -1,0 +1,67 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.css @ categories='obs.base'}"/>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="footer" style="background-color: white; color: black">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN BOTTOM ABOUT BLOCK -->
+          <div class="col-md-18">
+            <h2 align="center">ABOUT US</h2>
+            <p align="center">Ever wanted to buy a book but could not because it was too expensive? worry not! because <strong>BookStore</strong> is here! <strong>BookStore</strong>, these days in news,is being called as the Robinhood of the world of books. <strong>BookStore</strong> team is committed to bring to you all kinds of best books at the minimal prices ever seen anywhere. Yes, we are literally giving you away a steal. </p>
+			<h3 align="center">Shop on APP</h3>
+            <p align="center">Yes, We are on App. Just Search on play store/ App Store & install BookStore App. Unlock lots of shopping options.</p>
+          </div>
+          <!-- END BOTTOM ABOUT BLOCK -->
+          <!-- BEGIN BOTTOM INFO BLOCK -->
+          <div class="col-sm-6" style="margin-right: -20%">
+            <h2>Information</h2>
+            <ul class="list-unstyled">
+				<li><i class="fa fa-angle-right"></i> <a href="#">About</a></li>
+				<li><i class="fa fa-angle-right"></i> <a href="#">Contact Us</a></li>
+				<li><i class="fa fa-angle-right"></i> <a href="#">Frequently Asked Questions</a></li>
+				<li><i class="fa fa-angle-right"></i> <a href="#">Terms and Conditions</a></li>
+            </ul>
+          </div>
+          <!-- END INFO BLOCK -->
+            <!-- BEGIN NEWLETTER -->
+          <div class="col-sm-5" style="margin-top: 3%">
+            <div class="footer-subscribe-box">
+              <h2 align="center">Newsletter</h2>
+              <form action="#">
+                <div class="input-group" id="subscribe">
+                  <input type="text" placeholder="youremail@mail.com" id="subscribeEmail" class="form-control" required/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit" onclick="subscribe();">Subscribe</button>
+                  </span>
+                </div>
+				<div id="subscribeConfirm" style="display:none;">
+                  <span class="padding-top-10"> 
+                    Thank you for subscribing to our newsletter!
+                  </span>
+                </div>
+              </form>
+            </div> 
+          </div>
+          <!-- END NEWLETTER -->
+            
+          <!-- BEGIN BOTTOM CONTACTS -->
+          <div class="col-sm-3" align="right">
+            <h2>Our Contacts</h2>
+            <address class="margin-bottom-40">
+				<h4>BookStore.com</h4>	
+              #1218,<br>
+			  Sector-15, Sonepat,<br>
+			  Haryana -131001<br>
+              <abbr title="Phone">P:</abbr>+91-9050111218<br>
+              Email: <a href="mailto:info@bookchor.com">cs@bookchor.com</a><br>
+            </address>
+          </div>
+          <!-- END BOTTOM CONTACTS -->
+            
+        </div>
+        </div>
+      </div>
+    
+    <!-- END FOOTER -->

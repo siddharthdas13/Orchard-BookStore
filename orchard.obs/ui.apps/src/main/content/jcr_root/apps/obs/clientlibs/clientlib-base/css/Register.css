@@ -1,0 +1,148 @@
+#register{
+        background-color: black;
+        margin-right: 600px;
+        margin-left: 510px;
+        margin-right: 450px;
+        border: 1px solid white;
+        flex-wrap:flex;
+    }
+#register:hover{
+        background: black;
+        border: 1px solid #FFD700;
+    }
+    #regheader{
+        margin-left: 65px;
+        color: white;
+        text-decoration: underline    
+    }
+    #rusername,#rpassword,#fullAddress,#pin,#phone,#mail,#dob{
+        opacity: 0.5;
+        color: white;
+        margin-left: 65px;
+    }
+    .dob{
+        margin-left: 15px;
+        height: 45px;
+        text-align: center;
+        background-color: white;
+        color: black;
+        font-weight: bold;
+    }
+    .dob:hover{
+        border: 1px solid #FFD700;
+    }
+    #rusername:hover,#rpassword:hover,#fullAddress:hover,#pin:hover,#phone:hover,#mail:hover,#dob:hover{
+        opacity: 2;
+        color: #FFD700;
+    }
+     .rname , .rpassword,.pin, .phoneno, .mail{
+        color: white;
+        text-decoration-color: #FFD700;
+        width: 250px;
+        border-radius: 2px;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        border-bottom: 1px solid white;  
+        box-sizing: border-box;
+    }
+    .underline {
+        position: fixed;
+  background-color: white;
+  height: 12px;
+  left: 56px;
+  margin-top: 0;
+  top: 185px;       
+  
+}
+    #address{
+        margin-left: 13px;
+    }
+    .countries,.states,.cities{
+        width: 170px;
+        height: 50px;
+        background-color: black;
+        opacity: 0.5;
+        color: white;
+        font-weight: bold;
+        justify-content: center;
+    }
+    .countries:hover,.states:hover,.cities:hover{
+        opacity: 2;
+        border: 1px solid #FFD700;
+        color: #FFD700;
+    }
+    .countries:focus-within,.states:focus-within,.cities:focus-within{
+        opacity: 2;
+        border: 1px solid #FFD700;
+        color: #FFD700;
+    }
+    #textarea{
+        margin-left: 120px;
+        margin-top: -15px;
+        background-color: transparent;
+        border: 1px solid white;
+        color: white;
+    }
+    #textarea:hover{
+        border: 1px solid #FFD700;
+    }
+    #addressheader{
+        margin-top: 5px;
+    }
+    #gender{
+        float: right;
+        margin-right: 25px;
+        margin-top: -20px;
+    }
+    .gender{
+        width: 170px;
+        height: 50px;
+        background-color: black;
+        opacity: 0.5;
+        color: white;
+        font-weight: bold;
+        justify-content: center;
+    }
+    .gender:hover{
+        opacity: 2;
+        border: 1px solid #FFD700;
+        color: #FFD700;
+    }
+    .gender:focus-within{
+        opacity: 2;
+        border: 1px solid #FFD700;
+        color: #FFD700;
+    }
+    #log-btn{
+        background-color: white;
+  color: black;
+  text-align: center;
+        padding: 10px;
+  border: 1px solid black;
+  font-size: 16px; 
+margin-left: 252px;
+        cursor: pointer;
+    }
+    #log-btn:hover{
+        background-color: black;
+        color: white;
+        border:1px solid #FFD700;
+    }
+    
+    .fa-user-plus{
+        margin-left: 232px;
+        color: white;        
+    }
+    
+    #intro{
+        margin-top: -700px;
+        margin-left: 1000px;
+    }
+    
+    .info{
+        margin-top: -650px;
+        margin-left: 250px;
+        border: 2px solid white;
+    }
+    

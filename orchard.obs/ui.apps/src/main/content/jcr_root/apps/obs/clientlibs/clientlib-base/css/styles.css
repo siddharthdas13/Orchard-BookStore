@@ -1,0 +1,68 @@
+.head
+{
+  background-color:#6B8E23;
+  color: white;
+  font-weight: bolder;
+  padding: 20px;
+  margin-top: -1%;
+  margin-left: -1%;
+  margin-right: -1%;
+
+}
+
+
+#logo { 
+  float: left;
+    margin-top: -0.5%;
+    height: 50px;
+}
+
+
+
+  .head a {
+    color: black;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: bolder ;
+    padding-left: 25px;
+    padding-right: 20px;
+  }
+
+.fa{
+    margin: 2px;;
+}
+
+
+
+  .head a:hover {
+    background-color:#6B8E23;
+    color: white;
+  }
+
+  .head a.active {
+    background-color:lightgreen;
+    color:black;
+  }
+
+  .head-right {
+    margin-left: 420px;
+
+  }
+.span{
+    float: right;
+}
+  
+  
+  @media screen and (max-width:500px) {
+    .head a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    .head-right {
+      float: none;
+    }
+  }

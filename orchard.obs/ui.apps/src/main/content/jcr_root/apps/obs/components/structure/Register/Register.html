@@ -1,16 +1,21 @@
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"
 data-sly-call="${clientlib.css @ categories='obs.site'}"/>
-<form>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<script src="//geodata.solutions/includes/countrystatecity.js"></script>
+
+<form action="core/servlets/Register.java" method="post">
     <div id="register">
         <h2 id="regheader">Register to BookWorm-The Online Store</h2><br>
         <i class="fa fa-user-plus" style="font-size: 100px"></i><br><br>
-        <div id="username">
-                <b>Full Name:</b><input type="text" class="name" name="name" style="width: 345px;"><span class="underline"></span><br><br>        
+        <div id="rusername">
+                <b>Full Name:</b><input type="text" class="name" name="name" required style="width: 345px;"><span class="underline"></span><br><br>        
             </div>
-            <div id="password">
-                <b>Create Password:</b><input type="password" class="password" name="password"><span class="underline"></span><br><br>
+            <div id="rpassword">
+                <b>Create Password:</b><input type="password" class="password" name="password" required><span class="underline"></span><br><br>
             </div>
-            <div id="password">
+            <div id="rpassword">
                 <b>Confirm Password:</b><input type="password" class="password" name="cpassword"><span class="underline"></span><br><br><br>
             </div>
             <div id="dob">
@@ -29,18 +34,17 @@ data-sly-call="${clientlib.css @ categories='obs.site'}"/>
             </div>
             <div id="fullAddress">
             <div id="addressheader"><b>Full Address:</b></div>    
-            <textarea rows="4" cols="45" id="textarea"></textarea><br><br>  
+            <textarea rows="4" cols="45" id="textarea" names="address"></textarea><br><br>  
             </div>
             <div id="multi">
             <div id="pin">
                 <b>Pin Code:</b> <input type="number" class="pin" name="pin" style="width: 65px;" ><span class="underline"></span>
             </div>
             <div id="gender">
-            <select name="gender" class="gender" required>
-            <option value="gender" default>Select Gender</option>    
-            <option value="gender">Female</option>    
-            <option value="gender">Male</option>
-            <option value="gender">Other</option>    
+            <select name="gender" class="gender" required>    
+            <option value="Female">Female</option>    
+            <option value="Male">Male</option>
+            <option value="Other">Other</option>    
             </select>
             </div>
             </div><br><br>
@@ -52,7 +56,7 @@ data-sly-call="${clientlib.css @ categories='obs.site'}"/>
             <b>Email ID:</b><input type="text" class="mail" name="mail" style="width: 345px;"><span class="underline"></span><br><br>
             </div>
             <div id="btn">
-                <button id="log-btn"><b>Register</b></button>
+                <button id="log-btn" onclick="validate()"><b>Register</b></button>
             </div>
             
 </div>
