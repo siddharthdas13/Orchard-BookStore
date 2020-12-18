@@ -5,3 +5,4 @@ bootstrap.min.css
 styles.css
 Register.css
 Login.css
+sideNavigation.css
