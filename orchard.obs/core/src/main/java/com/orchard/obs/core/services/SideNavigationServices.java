@@ -15,16 +15,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.day.commons.datasource.poolservice.DataSourcePool;
-;
-@Component(immediate =  true, service = SideNavigationServices.class)
+import com.orchard.obs.core.models.Book;;
+
+@Component(immediate = true, service = SideNavigationServices.class)
 public class SideNavigationServices {
-	
-	
+
 	private Logger logger = LoggerFactory.getLogger(SideNavigationServices.class);
 	@Reference
 	DataSourcePool source;
-	
-	
+
 	public Connection getConnection(String dataSourceName) {
 		DataSource dataSource = null;
 		Connection connection = null;
@@ -94,7 +93,6 @@ public class SideNavigationServices {
 		return publishers;
 	}
 
-	/*@Override
 	public List<Book> getBookBasedOnGenre(String dataSourceName, String genre) {
 		Connection connection = getConnection(dataSourceName);
 		Statement statement = null;
@@ -109,16 +107,9 @@ public class SideNavigationServices {
 
 			while (resultSet.next()) {
 				Book book = new Book();
-				book.setISBN(resultSet.getString("ISBN"));
-				book.setName(resultSet.getString("NAME"));
-				book.setPageCount(resultSet.getInt("PAGECOUNT"));
-				book.setEdition(resultSet.getString("EDITION"));
-				book.setPublishedDate(resultSet.getDate("PUBLISHDATE"));
-				book.setPrice(resultSet.getFloat("PRICE"));
-				book.setDiscount(resultSet.getFloat("DISCOUNT"));
-				book.setRating(resultSet.getFloat("RATING"));
-				book.setDescription(resultSet.getString("NAME"));
-
+				book.setName(resultSet.getString("name"));
+				//book.setLanguage(resultSet.getString("languageId"));
+				book.setPrice(resultSet.getFloat("price"));
 				books.add(book);
 			}
 		} catch (Exception e) {
@@ -136,37 +127,29 @@ public class SideNavigationServices {
 		return books;
 	}
 
-	@Override
 	public List<Book> getBookBasedOnPublisher(String dataSourceName, String publisher) {
-		Connection connection = getConnection(dataSourceName);
+		Connection connection=getConnection(dataSourceName);
 		Statement statement = null;
 		ResultSet resultSet = null;
-		List<Book> books = new ArrayList<>();
+		List<Book> books=new ArrayList<>();
 		try {
 			logger.error("Inside Connection, Source Is  {}", source);
 			statement = connection.createStatement();
-			String query = "SELECT * FROM BOOK INNER JOIN PUBLISHER ON BOOK.PUBLISHERID=PUBLISHER.PUBLISHERID WHERE PUBLISHER.PUBLISHERNAME='"
-					+ publisher + "'";
+			String query="Select * FROM book inner join publisher on Book.publisherid=publisher.publisherid where publisher.publisherName='"+publisher+"'";
 			resultSet = statement.executeQuery(query);
 
 			while (resultSet.next()) {
-				Book book = new Book();
-				book.setISBN(resultSet.getString("ISBN"));
-				book.setName(resultSet.getString("NAME"));
-				book.setPageCount(resultSet.getInt("PAGECOUNT"));
-				book.setEdition(resultSet.getString("EDITION"));
-				book.setPublishedDate(resultSet.getDate("PUBLISHDATE"));
-				book.setPrice(resultSet.getFloat("PRICE"));
-				book.setDiscount(resultSet.getFloat("DISCOUNT"));
-				book.setRating(resultSet.getFloat("RATING"));
-				book.setDescription(resultSet.getString("NAME"));
-
+				Book book=new Book();
+				
+				book.setName(resultSet.getString("name"));
+				//book.setLanguage(resultSet.getInt("languageId"));
+				book.setPrice(resultSet.getFloat("price"));
 				books.add(book);
-			}
+			} 
 		} catch (Exception e) {
 			logger.error("Error Occured  While Establishing The Connection : " + e);
-		} finally {
-			try {
+		}finally {
+				try {	
 				resultSet.close();
 				statement.close();
 				connection.close();
@@ -176,6 +159,5 @@ public class SideNavigationServices {
 			}
 		}
 		return books;
-	}*/
-
+	}
 }
