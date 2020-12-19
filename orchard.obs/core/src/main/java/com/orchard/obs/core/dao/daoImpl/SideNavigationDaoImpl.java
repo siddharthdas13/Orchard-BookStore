@@ -91,10 +91,10 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 			while (resultSet.next()) {
 				Book book = new Book();
 				book.setName(resultSet.getString("NAME"));
-				book.setLanguage(resultSet.getString("LANUAGE"));
+				book.setLanguage(resultSet.getString("LANGUAGE"));
 				book.setPrice(resultSet.getFloat("PRICE"));
 				book.setAuthor(resultSet.getString("AUTHOR"));
-
+				
 				books.add(book);
 			}
 		} catch (Exception e) {
