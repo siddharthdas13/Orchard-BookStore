@@ -1,0 +1,35 @@
+.sideNav-ul li a{
+	text-decoration:none;
+	color:black;
+	
+}
+.sideNav-ul{
+	list-style-type:none;
+}
+.sideNav-ul li{
+	font-family:Monospace;
+	font-size:18px;
+}
+.sideNav-ul li a:hover {
+	color:cyan;
+}
+.sideNav-Background{
+    background-color:white;
+    float:left;
+    width:20%;
+	border:1px solid gray;	
+}
+.publisher {
+  margin: 5px;
+  padding:2px;
+  border: 2px solid #b4b4b4;
+  float: left;
+  width: 90px;
+}
+.publisher img {
+  width: 100%;
+  height: auto;
+}
+.publisher img:hover{
+	opacity:0.3;
+}

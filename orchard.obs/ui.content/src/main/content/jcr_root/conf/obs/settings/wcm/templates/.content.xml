@@ -4,8 +4,4 @@
     jcr:primaryType="cq:Page">
     <content-page/>
     <rep:policy/>
-    <footer/>
-    <header-footer/>
-    <login/>
-    <register/>
 </jcr:root>

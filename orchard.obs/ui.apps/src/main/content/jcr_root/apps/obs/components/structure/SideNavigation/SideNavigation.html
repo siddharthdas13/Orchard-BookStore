@@ -1,0 +1,24 @@
+<sly
+	data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"></sly>
+<sly data-sly-call="${clientlib.all @ categories='obs.base'}"></sly>
+
+<sly data-sly-use.sideNavigation="com.orchard.obs.core.models.SideNavigationModel"></sly>
+<div>
+<div class="sideNav-Background">
+	
+	<div>
+		<h4>CATEGORIES<h4>
+			<ul class="sideNav-ul" data-sly-list.bookCategories="${sideNavigation.bookGenres}">
+				<li><a id="${bookCategories}" href="#" onclick="getBookByGenre(this.id)">${bookCategories}</a></li>
+			</ul>
+	</div>
+	<div>
+		<h3>PUBLISHERS</h3>
+		<ul class="sideNav-ul" data-sly-list.bookPublishers="${sideNavigation.bookPublishers}">
+			<li class="publisher"><a id="${bookPublishers}" href="#" onclick="getBookByPublisher(this.id)"><img src="/content/dam/obs/en/images/publishers/${bookPublishers}.jpg"></a></li>
+		</ul>
+	</div>
+	
+</div>
+	<div style="float:right;width:70%" id="ab"></div>
+</div>

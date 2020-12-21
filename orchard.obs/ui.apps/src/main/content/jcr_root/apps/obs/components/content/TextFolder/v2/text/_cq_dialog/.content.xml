@@ -4,6 +4,4 @@
     jcr:title="Text"
     sling:resourceType="cq/gui/components/authoring/dialog"
     helpPath="https://www.adobe.com/go/aem_cmp_text_v2"
-    trackingFeature="core-components:text:v2">
-    <content/>
-</jcr:root>
+    trackingFeature="core-components:text:v2"/>
