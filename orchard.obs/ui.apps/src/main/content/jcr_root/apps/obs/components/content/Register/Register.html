@@ -1,47 +1,46 @@
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"
-data-sly-call="${clientlib.css @ categories='obs.site'}"/>
-
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"></sly>
+<sly data-sly-call="${clientlib.all @ categories='obs.base'}"></sly>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 <script src="//geodata.solutions/includes/countrystatecity.js"></script>
 
-<form action="core/servlets/Register.java" method="post">
+<form>
     <div id="register">
         <h2 id="regheader">Register to BookWorm-The Online Store</h2><br>
         <i class="fa fa-user-plus" style="font-size: 100px"></i><br><br>
         <div id="rusername">
-                <b>Full Name:</b><input type="text" class="name" name="name" required style="width: 345px;"><span class="underline"></span><br><br>        
+                <b>Full Name:</b><input type="text" class="name" id="name"name="name" required style="width: 345px;"><span class="underline"></span><br><br>        
             </div>
             <div id="rpassword">
-                <b>Create Password:</b><input type="password" class="password" name="password" required><span class="underline"></span><br><br>
+                <b>Create Password:</b><input type="password" class="password" id="password" name="password" minlength="4" required><span class="underline"></span><br><br>
             </div>
             <div id="rpassword">
-                <b>Confirm Password:</b><input type="password" class="password" name="cpassword"><span class="underline"></span><br><br><br>
+                <b>User Name:</b><input type="text" class="name" id="uname" name="uname"><span class="underline"></span><br><br><br>
             </div>
             <div id="dob">
-                <b>Date Of Birth:</b><input type="date" class="dob" name="dob"><br><br>
+                <b>Date Of Birth:</b><input type="date" class="dob" name="dob" id="db"><br><br>
             </div>
             <div id="address">
                 <select name="country" class="countries" id="countryId" required>
-                <option value="" id="options">Select Country</option>
+                <option value="" id="coptions">Select Country</option>
             </select>
             <select name="state" class="states" id="stateId" required>
-                <option value="" id="options">Select State</option>
+                <option value="" id="soptions">Select State</option>
             </select>
             <select name="city" class="cities" id="cityId" required>
-                <option value="" id="options">Select City</option>
+                <option value="" id="cioptions">Select City</option>
             </select><br><br>
             </div>
             <div id="fullAddress">
             <div id="addressheader"><b>Full Address:</b></div>    
-            <textarea rows="4" cols="45" id="textarea" names="address"></textarea><br><br>  
+            <textarea rows="4" cols="45" id="textarea" name="address"></textarea><br><br>  
             </div>
             <div id="multi">
             <div id="pin">
-                <b>Pin Code:</b> <input type="number" class="pin" name="pin" style="width: 65px;" ><span class="underline"></span>
+                <b>Pin Code:</b> <input type="number" class="pin" id="pn" name="pin" style="width: 65px;" ><span class="underline"></span>
             </div>
             <div id="gender">
-            <select name="gender" class="gender" required>    
+            <select name="gender" class="gender" id="g" required>    
             <option value="Female">Female</option>    
             <option value="Male">Male</option>
             <option value="Other">Other</option>    
@@ -50,10 +49,10 @@ data-sly-call="${clientlib.css @ categories='obs.site'}"/>
             </div><br><br>
             
             <div id="phone">
-                <b>Phone Number:</b> <input type="tel" class="phoneno" name="phone" style="width: 145px;"><span class="underline"></span><br><br><br>
+                <b>Phone Number:</b> <input type="tel" class="phoneno" id="phn" name="phone" placeholder="1234567890" pattern="[0-9]{10}" style="width: 145px;"><span class="underline"></span><br><br><br>
             </div>
             <div id="mail">
-            <b>Email ID:</b><input type="text" class="mail" name="mail" style="width: 345px;"><span class="underline"></span><br><br>
+            <b>Email ID:</b><input type="text" class="mail" id="m" name="mail" style="width: 345px;"><span class="underline"></span><br><br>
             </div>
             <div id="btn">
                 <button id="log-btn" onclick="validate()"><b>Register</b></button>

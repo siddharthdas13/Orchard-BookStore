@@ -1,5 +1,4 @@
 package com.orchard.obs.core.util;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,11 +12,10 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.day.commons.datasource.poolservice.DataSourceNotFoundException;
 import com.day.commons.datasource.poolservice.DataSourcePool;
-
-@Component(immediate = true, service = DBConnectionUtil.class)
-
-public class DBConnectionUtil {
+@Component(immediate = true, service = DBUtil.class)
+public class DBUtil {
 	private Logger logger = LoggerFactory.getLogger(DBConnectionUtil.class);
 	@Reference
 	DataSourcePool source;
@@ -25,17 +23,15 @@ public class DBConnectionUtil {
 	 * 
 	 * @param dataSourceName	name of dataSource to connect to DataBase
 	 * @return					connection object 
+	 * @throws DataSourceNotFoundException 
+	 * @throws SQLException 
 	 */
-	public Connection getConnection(String dataSourceName) {
+	public Connection getConnection(String dataSourceName) throws DataSourceNotFoundException, SQLException {
 		DataSource dataSource = null;
 		Connection connection = null;
-		try {
-			logger.error("Inside Connection , Source Is {}", source);
+		logger.error("Inside Connection , Source Is {}", source);
 			dataSource = (DataSource) source.getDataSource(dataSourceName);
 			connection = dataSource.getConnection();
-		} catch (Exception e) {
-			logger.error("Error Occured While Establishing The Connection : " + e);
-		}
 		return connection;
 	}
 

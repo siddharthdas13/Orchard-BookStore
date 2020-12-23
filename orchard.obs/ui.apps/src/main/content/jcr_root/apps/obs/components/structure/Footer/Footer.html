@@ -1,6 +1,7 @@
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
      data-sly-call="${clientlib.css @ categories='obs.base'}"/>
 
+<sly data-sly-use.footer="com.orchard.obs.core.models.FooterModel"></sly>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="footer" style="background-color: white; color: black">
@@ -8,10 +9,10 @@
         <div class="row">
           <!-- BEGIN BOTTOM ABOUT BLOCK -->
           <div class="col-md-18">
-            <h2 align="center">ABOUT US</h2>
-            <p align="center">Ever wanted to buy a book but could not because it was too expensive? worry not! because <strong>BookStore</strong> is here! <strong>BookStore</strong>, these days in news,is being called as the Robinhood of the world of books. <strong>BookStore</strong> team is committed to bring to you all kinds of best books at the minimal prices ever seen anywhere. Yes, we are literally giving you away a steal. </p>
-			<h3 align="center">Shop on APP</h3>
-            <p align="center">Yes, We are on App. Just Search on play store/ App Store & install BookStore App. Unlock lots of shopping options.</p>
+              <h2 align="center">${footer.aboutUs}</h2>
+              <p align="center">${footer.aboutUsContent}</p>
+			<h3 align="center">${footer.shop}</h3>
+            <p align="center">${footer.shopContent}</p>
           </div>
           <!-- END BOTTOM ABOUT BLOCK -->
           <!-- BEGIN BOTTOM INFO BLOCK -->
@@ -28,7 +29,7 @@
             <!-- BEGIN NEWLETTER -->
           <div class="col-sm-5" style="margin-top: 3%">
             <div class="footer-subscribe-box">
-              <h2 align="center">Newsletter</h2>
+              <h2 align="center">${footer.newsletter}</h2>
               <form action="#">
                 <div class="input-group" id="subscribe">
                   <input type="text" placeholder="youremail@mail.com" id="subscribeEmail" class="form-control" required/>
