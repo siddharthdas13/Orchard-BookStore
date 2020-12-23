@@ -3,28 +3,43 @@
     jcr:primaryType="cq:Page">
     <jcr:content
         cq:deviceGroups="[/etc/mobile/groups/responsive]"
-        cq:lastModified="{Date}2020-12-17T18:31:20.483+05:30"
+        cq:lastModified="{Date}2020-12-23T14:59:23.174+05:30"
         cq:lastModifiedBy="admin"
-        cq:template="/conf/obs/settings/wcm/templates/page"
+        cq:template="/conf/obs/settings/wcm/templates/pagetemplate0"
         jcr:isCheckedOut="{Boolean}true"
         jcr:mixinTypes="[mix:versionable]"
         jcr:primaryType="cq:PageContent"
-        jcr:uuid="4bfdf97a-5414-4610-9cbe-ce0ab0166f31"
+        jcr:uuid="9ff0163b-adee-4fa2-a6c0-14b5d768a746"
         sling:resourceType="obs/components/structure/page">
         <root
             jcr:primaryType="nt:unstructured"
             sling:resourceType="wcm/foundation/components/responsivegrid">
             <header
-                jcr:created="{Date}2020-12-17T18:13:45.423+05:30"
+                jcr:created="{Date}2020-12-22T19:51:07.787+05:30"
                 jcr:createdBy="admin"
-                jcr:lastModified="{Date}2020-12-17T18:13:45.423+05:30"
+                jcr:lastModified="{Date}2020-12-22T20:01:13.841+05:30"
                 jcr:lastModifiedBy="admin"
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="obs/components/structure/Header"/>
-            <footer
-                jcr:created="{Date}2020-12-17T18:13:53.714+05:30"
+            <responsivegrid
+                jcr:created="{Date}2020-12-22T19:53:32.399+05:30"
                 jcr:createdBy="admin"
-                jcr:lastModified="{Date}2020-12-17T18:13:53.714+05:30"
+                jcr:lastModified="{Date}2020-12-22T19:53:32.399+05:30"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wcm/foundation/components/responsivegrid"
+                editable="{Boolean}true">
+                <cq:responsive jcr:primaryType="nt:unstructured">
+                    <default
+                        jcr:primaryType="nt:unstructured"
+                        offset="0"
+                        width="12"/>
+                </cq:responsive>
+            </responsivegrid>
+            <footer
+                jcr:created="{Date}2020-12-22T19:53:46.017+05:30"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2020-12-22T19:53:46.017+05:30"
                 jcr:lastModifiedBy="admin"
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="obs/components/structure/Footer"/>

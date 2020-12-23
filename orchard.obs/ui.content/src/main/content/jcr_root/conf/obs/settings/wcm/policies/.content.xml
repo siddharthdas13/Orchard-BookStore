@@ -8,11 +8,14 @@
             <components jcr:primaryType="nt:unstructured">
                 <responsivegrid jcr:primaryType="nt:unstructured">
                     <content-default
+                        cq:styleDefaultClasses="obs.base"
                         jcr:description="Policy for editable layout containers"
+                        jcr:lastModified="{Date}2020-12-23T12:09:58.902+05:30"
+                        jcr:lastModifiedBy="admin"
                         jcr:primaryType="nt:unstructured"
                         jcr:title="Orchard Book Store Default"
                         sling:resourceType="wcm/core/components/policy/policy"
-                        components="[group:OBS,/apps/obs/components/form/container]"
+                        components="[/libs/wcm/foundation/components/responsivegrid,group:Carousel Component ,/apps/obs/components/structure/ProductTile,group:OBS,/apps/obs/components/form/container,/apps/obs/components/content/breadcrumb,/apps/obs/components/structure/Footer,/apps/obs/components/structure/Header,/apps/obs/components/structure/Login,/apps/obs/components/structure/Register,/apps/obs/components/page/textimagecomponent]"
                         policyResourceType="wcm/foundation/components/responsivegrid">
                         <cq:authoring jcr:primaryType="nt:unstructured">
                             <assetToComponentMapping jcr:primaryType="nt:unstructured">
@@ -29,7 +32,28 @@
                             jcr:primaryType="nt:unstructured"
                             mergeList="{Boolean}true"/>
                     </content-default>
+                    <policy_46988915105500
+                        jcr:lastModified="{Date}2020-12-23T13:22:36.521+05:30"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="hjg"
+                        sling:resourceType="wcm/core/components/policy/policy"
+                        components="[group:General,group:Carousel Component ,/apps/obs/components/structure/ProductTile,group:OBS,group:obsGroup]">
+                        <jcr:content jcr:primaryType="nt:unstructured"/>
+                    </policy_46988915105500>
                 </responsivegrid>
+                <parsys jcr:primaryType="nt:unstructured">
+                    <policy_1608638354132
+                        jcr:lastModified="{Date}2020-12-22T17:30:06.313+05:30"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="aa"
+                        sling:resourceType="wcm/core/components/policy/policy"
+                        components="[group:OBS,group:obsGroup]">
+                        <jcr:content jcr:primaryType="nt:unstructured"/>
+                        <section jcr:primaryType="nt:unstructured"/>
+                    </policy_1608638354132>
+                </parsys>
             </components>
         </foundation>
     </wcm>
@@ -46,6 +70,63 @@
                     </form-container>
                 </container>
             </form>
+            <structure jcr:primaryType="nt:unstructured">
+                <page jcr:primaryType="nt:unstructured"/>
+            </structure>
+            <content jcr:primaryType="nt:unstructured">
+                <image jcr:primaryType="nt:unstructured">
+                    <policy_1608638159534
+                        jcr:lastModified="{Date}2020-12-22T18:36:54.266+05:30"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="aa"
+                        sling:resourceType="wcm/core/components/policy/policy"
+                        allowedRenditionWidths="[250,150]"
+                        allowUpload="true"
+                        altValueFromDAM="true"
+                        disableLazyLoading="true"
+                        displayPopupTitle="true"
+                        isDecorative="false"
+                        jpegQuality="{Long}100"
+                        titleValueFromDAM="true"
+                        uuidDisabled="true">
+                        <plugins jcr:primaryType="nt:unstructured">
+                            <rotate
+                                jcr:primaryType="nt:unstructured"
+                                features="right"/>
+                            <flip
+                                jcr:primaryType="nt:unstructured"
+                                features="-"/>
+                            <crop
+                                jcr:primaryType="nt:unstructured"
+                                features="*">
+                                <aspectRatios jcr:primaryType="nt:unstructured">
+                                    <item0
+                                        jcr:primaryType="nt:unstructured"
+                                        name="Wide Landscape"
+                                        ratio="0.6180"/>
+                                    <item1
+                                        jcr:primaryType="nt:unstructured"
+                                        name="Landscape"
+                                        ratio="0.8284"/>
+                                    <item2
+                                        jcr:primaryType="nt:unstructured"
+                                        name="Square"
+                                        ratio="1"/>
+                                    <item3
+                                        jcr:primaryType="nt:unstructured"
+                                        name="Portrait"
+                                        ratio="1.6180"/>
+                                </aspectRatios>
+                            </crop>
+                        </plugins>
+                        <jcr:content jcr:primaryType="nt:unstructured"/>
+                    </policy_1608638159534>
+                </image>
+            </content>
+            <page jcr:primaryType="nt:unstructured">
+                <image jcr:primaryType="nt:unstructured"/>
+            </page>
         </components>
     </obs>
 </jcr:root>
