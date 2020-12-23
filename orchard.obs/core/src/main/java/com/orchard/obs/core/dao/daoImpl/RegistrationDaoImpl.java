@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -76,6 +78,35 @@ public class RegistrationDaoImpl implements RegistrationDao {
 			dbConnectionUtil.closeResource(connection);
 		}
 		return status;
+	}
+
+	@Override
+	public List<String> checkDuplicateMail(String dataSourceName, String mail) throws CustomerDaoExceptions {
+		Connection connection=null;
+		List<String> list=new ArrayList<String>();
+		try {
+			connection = dbConnectionUtil.getConnection(dataSourceName);
+		} catch (DataSourceNotFoundException e) {
+			throw new CustomerDaoExceptions("Data Source Not Found",e);
+		}
+		catch (SQLException e) {
+			throw new CustomerDaoExceptions("Connection Failed",e);
+		}
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			logger.error("Inside Connection, Source Is  {}", source);
+			String query="select email from customer";
+			preparedStatement=connection.prepareStatement(query);
+			resultSet=preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				list.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			throw new CustomerDaoExceptions("Error While fetching",e);
+		}
+		return list;
 	}
 
 }
