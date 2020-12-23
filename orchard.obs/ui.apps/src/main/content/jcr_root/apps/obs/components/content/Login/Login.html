@@ -1,0 +1,30 @@
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"
+data-sly-call="${clientlib.css @ categories='obs.base'}"/>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link rel="stylesheet" href="css/Login.css">
+    <div id="row">
+        <form>
+            <div id="login">
+            <h2 id="logheader">Login</h2>
+            <i class="fas fa-user-check"></i><br><br>
+            <div id="username">
+                <b>Username:</b><input type="text" class="name" name="name"><span class="underline"></span><br><br>        
+            </div>
+            <div id="password">
+                <b>Password:</b><input type="password" class="password" name="password"><span class="underline"></span><br><br>
+            </div>
+            <div id="btn">
+                <button id="log-btn"><b>Login</b></button>
+            </div>
+            <div id="fgt-pass">
+                <a href="#" class="fgt-text">Forgot Password?</a><br><br>
+            </div>
+            </div>
+        </form>
+        <div id="btn">
+                    <a href="Register.html"><button id="reg-btn"><b>Sign up Today </b></button></a>
+        </div>
+<!--
+        
+-->
+    </div>
