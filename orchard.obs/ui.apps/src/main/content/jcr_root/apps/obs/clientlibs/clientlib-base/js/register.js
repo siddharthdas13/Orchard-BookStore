@@ -14,13 +14,19 @@ var phone=document.getElementById('phn').value;
 var mail=document.getElementById('m').value;
 var data="name="+name+"&password="+password+"&uname="+uname+"&dob="+dob+"&country="+country+"&state="+state+"&city="+city+"&address="+address+
 "&pin="+pin+"&gender="+gender+"&phone="+phone+"&mail="+mail;
-
+var success="Registered";
 
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
-     // Response
-     alert(this.responseText);
+     var message=this.responseText;
+     if(success==message){
+     	alert(message);
+     	window.location("Login.html");
+     }
+     else{
+     	alert(message);
+     }
    }
 };
 xhttp.open("POST", "/bin/Register", true); 
