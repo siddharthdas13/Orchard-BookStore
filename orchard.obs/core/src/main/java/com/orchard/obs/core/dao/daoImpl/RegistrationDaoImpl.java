@@ -50,6 +50,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 		try {
 			logger.error("Inside Connection, Source Is  {}", source);
 			String id=customer.getId();
+			String password=customer.getPassword();
 			String name=customer.getName();
 			String mail=customer.getMail();
 			String gender=customer.getGender();
@@ -61,7 +62,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 			String city=customer.getCity();
 			String pin=customer.getPin();
 			statement=connection.createStatement();
-			String query = "insert into customer values('"+id+"','"+name+"','"+mail+"','"+gender+"','"+dob+"','"+phone+"','"+address+"','"+country+"','"+state+"','"+city+"','"+pin+"')";
+			String query = "insert into customer values('"+id+"','"+password+"','"+name+"','"+mail+"','"+gender+"','"+dob+"','"+phone+"','"+address+"','"+country+"','"+state+"','"+city+"','"+pin+"')";
 			statement.executeUpdate(query);
 			logger.error("after insert query");
 			status=true;
