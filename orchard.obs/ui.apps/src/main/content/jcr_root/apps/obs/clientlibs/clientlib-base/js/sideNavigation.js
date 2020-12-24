@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	deleteCookie('customObject');
+	getFilteredBook('genre','all');
 });
 function setCookie(name, filter) {
 	var customObject = {};
