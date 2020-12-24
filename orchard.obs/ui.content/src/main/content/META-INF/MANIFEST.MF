@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Content-Package-Id: my_packages:obs_content
+Content-Package-Roots: /conf/obs
+Content-Package-Type: content
+

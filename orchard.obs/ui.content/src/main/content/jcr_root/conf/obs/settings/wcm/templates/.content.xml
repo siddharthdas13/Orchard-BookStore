@@ -4,4 +4,6 @@
     jcr:primaryType="cq:Page">
     <content-page/>
     <rep:policy/>
+    <navtemplate/>
+    <pagetemplate0/>
 </jcr:root>

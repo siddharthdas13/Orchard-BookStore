@@ -1,0 +1,25 @@
+.we-breadcrumb{
+    float:left;
+}
+.cmp-breadcrumb{
+    float:left;
+}
+.cmp-breadcrumb__list{
+	padding:10px;
+}
+.cmp-breadcrumb__item{
+	display:inline-block;
+	font-size:20px;
+}
+.cmp-breadcrumb__item:not(:last-of-type)::after{
+	content:">";
+	margin:0px 5px;
+	color:Gray;
+}
+.cmp-breadcrumb__item-link{
+	text-decoration:none;
+	color:Black;
+}
+.cmp-breadcrumb__item-link:hover{
+	text-decoration:underline;
+}

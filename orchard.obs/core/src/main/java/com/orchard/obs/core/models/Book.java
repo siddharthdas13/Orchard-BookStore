@@ -1,9 +1,11 @@
 package com.orchard.obs.core.models;
 
+import java.util.List;
+
 public class Book {
 	private String name;
 	private float price;
-	private String author;
+	private List<String> authors;
 	private String language;
 	
 	
@@ -11,11 +13,11 @@ public class Book {
 		super();
 	}
 
-	public Book(String name, float price, String author, String language) {
+	public Book(String name, float price, List<String> authors, String language) {
 		super();
 		this.name = name;
 		this.price = price;
-		this.author = author;
+		this.authors = authors;
 		this.language = language;
 	}
 
@@ -50,15 +52,15 @@ public class Book {
 	/**
 	 * @return the author
 	 */
-	public String getAuthor() {
-		return author;
+	public List<String> getAuthors() {
+		return authors;
 	}
 
 	/**
 	 * @param author the author to set
 	 */
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setAuthor(List<String> authors) {
+		this.authors = authors;
 	}
 
 	/**

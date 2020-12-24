@@ -12,4 +12,6 @@ public interface SideNavigationDao {
 	public List<Book> getBookBasedOnGenre(String dataSourceName, String genre);
 
 	public List<Book> getBookBasedOnPublisher(String dataSourceName, String publisher);
+
+	public List<Book> getBookBasedOnGenreAndPublisher(String dataSourceName, String genre, String publisher);
 }

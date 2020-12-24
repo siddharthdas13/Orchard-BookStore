@@ -1,5 +1,5 @@
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"
-data-sly-call="${clientlib.css @ categories='obs.site'}"/>
+data-sly-call="${clientlib.css @ categories='obs.base'}"/>
 
 
 <sly data-sly-use.header="com.orchard.obs.core.models.Header"></sly>
@@ -8,10 +8,10 @@ data-sly-call="${clientlib.css @ categories='obs.site'}"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <head>
-<div class ="pre-head">
-      <img src="/content/dam/obs/en/images/th (1).jpg" alt="bookstore logo"  id="logo" height=50px />
-      <div>
- <ul >
+<div class="head">
+      <img src="/content/dam/obs/en/images/icon.png" alt="bookstore logo"  id="logo" height=200px width:200px />
+      <div class="head-right">
+ <ul>
 
         <li class="dropdown" data-sly-repeat="${header.pages}">
              <a  href="${item.path}.html">${item.title}</a>
@@ -22,14 +22,19 @@ data-sly-call="${clientlib.css @ categories='obs.site'}"/>
              </ul>
 
         </li>
+</ul>
 
-	<li  style: "padding-right:40px">
-      <a href="login.html"><i class="fa fa-user-circle" style="font-size:30px;" ></i></a></li>
-
-    <li> <a href="cart.html"><i class="fa fa-shopping-cart" style="font-size:30px;" ></i></a>
-    </li>
-    </ul>
 </div>
+
+
+<ul class="navcart">
+
+	<li>
+      <!--a href="login.html"--><i class="fa fa-user-circle" style="font-size:30px;" ></i><!--/a--></li>
+
+    <li style="padding-left:20px"> <!--a href="cart.html"--><i class="fa fa-shopping-cart" style="font-size:30px;" ></i><!--/a-->
+    </li>
+   </ul>
 
 
 </div>
