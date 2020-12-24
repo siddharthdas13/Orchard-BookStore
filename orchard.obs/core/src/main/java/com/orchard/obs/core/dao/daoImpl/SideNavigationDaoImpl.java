@@ -26,7 +26,7 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 
 	@Reference
 	DataSourcePool source;
-	
+
 	@Override
 	public List<String> getBookGenres(String dataSourceName) {
 		Connection connection = dbConnectionUtil.getConnection(dataSourceName);
@@ -50,7 +50,7 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 		}
 		return genres;
 	}
-	
+
 	@Override
 	public List<String> getBookPublishers(String dataSourceName) {
 		Connection connection = dbConnectionUtil.getConnection(dataSourceName);
@@ -74,49 +74,66 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 		}
 		return publishers;
 	}
-	
+
 	@Override
 	public List<Book> getBookBasedOnGenre(String dataSourceName, String genre) {
 		Connection connection = dbConnectionUtil.getConnection(dataSourceName);
 		Statement statement = null;
+		Statement statement1 = null;
 		ResultSet resultSet = null;
+		ResultSet resultSet1 = null;
 		List<Book> books = new ArrayList<>();
 		try {
 			logger.error("Inside Connection, Source Is  {}", source);
 			statement = connection.createStatement();
-			String query = "SELECT * FROM BOOK INNER JOIN GENRE ON BOOK.GENREID=GENRE.GENREID WHERE GENRE.GENRENAME='"
-					+ genre + "'";
+			String query = "SELECT * FROM BOOK";
+			if (!(genre.equals("all")))
+				query = "SELECT * FROM BOOK INNER JOIN GENRE ON BOOK.GENREID=GENRE.GENREID WHERE GENRE.GENRENAME LIKE'"
+						+ genre + "'";
 			resultSet = statement.executeQuery(query);
-
 			while (resultSet.next()) {
 				Book book = new Book();
 				book.setName(resultSet.getString("NAME"));
 				book.setLanguage(resultSet.getString("LANGUAGE"));
 				book.setPrice(resultSet.getFloat("PRICE"));
-				book.setAuthor(resultSet.getString("AUTHOR"));
-				
+				statement1 = connection.createStatement();
+				query = "SELECT DISTINCT AUTHOR.AUTHORNAME FROM AUTHOR INNER JOIN AUTHOR_BOOK ON AUTHOR.AUTHORID=AUTHOR_BOOK.AUTHORID WHERE AUTHOR_BOOK.BOOKID='"
+						+ resultSet.getString("ISBN") + "'";
+
+				resultSet1 = statement1.executeQuery(query);
+				List<String> authors = new ArrayList<>();
+				while (resultSet1.next()) {
+					authors.add(resultSet1.getString("AUTHORNAME"));
+				}
+				book.setAuthor(authors);
 				books.add(book);
 			}
 		} catch (Exception e) {
 			logger.error("Error Occured  While Establishing The Connection : " + e);
 		} finally {
+			dbConnectionUtil.closeResource(resultSet1);
 			dbConnectionUtil.closeResource(resultSet);
+			dbConnectionUtil.closeResource(statement1);
 			dbConnectionUtil.closeResource(statement);
 			dbConnectionUtil.closeResource(connection);
 		}
 		return books;
 	}
-	
+
 	@Override
 	public List<Book> getBookBasedOnPublisher(String dataSourceName, String publisher) {
 		Connection connection = dbConnectionUtil.getConnection(dataSourceName);
 		Statement statement = null;
+		Statement statement1 = null;
 		ResultSet resultSet = null;
+		ResultSet resultSet1 = null;
 		List<Book> books = new ArrayList<>();
 		try {
 			logger.error("Inside Connection, Source Is  {}", source);
 			statement = connection.createStatement();
-			String query = "Select * FROM BOOK INNER JOIN PUBLISHER ON BOOK.PUBLISHERID=PUBLISHER.PUBLISHERID WHERE PUBLISHER.PUBLISHERNAME='"
+			String query = "SELECT * FROM BOOK";
+			if (!(publisher.equals("all")))
+			query = "Select * FROM BOOK INNER JOIN PUBLISHER ON BOOK.PUBLISHERID=PUBLISHER.PUBLISHERID WHERE PUBLISHER.PUBLISHERNAME LIKE'"
 					+ publisher + "'";
 			resultSet = statement.executeQuery(query);
 
@@ -126,14 +143,73 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 				book.setName(resultSet.getString("NAME"));
 				book.setLanguage(resultSet.getString("LANGUAGE"));
 				book.setPrice(resultSet.getFloat("PRICE"));
-				book.setAuthor(resultSet.getString("AUTHOR"));
+
+				statement1 = connection.createStatement();
+				query = "SELECT DISTINCT AUTHOR.AUTHORNAME FROM AUTHOR INNER JOIN AUTHOR_BOOK ON AUTHOR.AUTHORID=AUTHOR_BOOK.AUTHORID WHERE AUTHOR_BOOK.BOOKID='"
+						+ resultSet.getString("ISBN") + "'";
+
+				resultSet1 = statement1.executeQuery(query);
+				List<String> authors = new ArrayList<>();
+				while (resultSet1.next()) {
+					authors.add(resultSet1.getString("AUTHORNAME"));
+				}
+				book.setAuthor(authors);
+
+				books.add(book);
+			}
+		} catch (Exception e) {
+			logger.error("Error Occured  While Establishing The Connection : " + e);
+		} finally {
+			dbConnectionUtil.closeResource(resultSet1);
+			dbConnectionUtil.closeResource(resultSet);
+			dbConnectionUtil.closeResource(statement1);
+			dbConnectionUtil.closeResource(statement);
+			dbConnectionUtil.closeResource(connection);
+		}
+		return books;
+	}
+
+	@Override
+	public List<Book> getBookBasedOnGenreAndPublisher(String dataSourceName, String genre, String publisher) {
+		Connection connection = dbConnectionUtil.getConnection(dataSourceName);
+		Statement statement = null;
+		Statement statement1 = null;
+		ResultSet resultSet = null;
+		ResultSet resultSet1 = null;
+		List<Book> books = new ArrayList<>();
+		try {
+			logger.info("INISDE BOTH GENRE AND PUBLISHER METHOD");
+			statement = connection.createStatement();
+			String query = "SELECT BOOK.* FROM BOOK INNER JOIN GENRE on BOOK.GENREID=GENRE.GENREID \n"
+					+ "	INNER JOIN PUBLISHER ON BOOK.PUBLISHERID=PUBLISHER.PUBLISHERID WHERE (PUBLISHER.PUBLISHERNAME='"
+					+ publisher + "') AND (GENRE.GENRENAME='" + genre + "');";
+			resultSet = statement.executeQuery(query);
+
+			while (resultSet.next()) {
+				Book book = new Book();
+
+				book.setName(resultSet.getString("NAME"));
+				book.setLanguage(resultSet.getString("LANGUAGE"));
+				book.setPrice(resultSet.getFloat("PRICE"));
+				statement1 = connection.createStatement();
+				query = "SELECT AUTHOR.AUTHORNAME FROM AUTHOR INNER JOIN AUTHOR_BOOK ON AUTHOR.AUTHORID=AUTHOR_BOOK.AUTHORID WHERE AUTHOR_BOOK.BOOKID='"
+						+ resultSet.getString("ISBN") + "'";
+
+				resultSet1 = statement1.executeQuery(query);
+				List<String> authors = new ArrayList<>();
+				while (resultSet1.next()) {
+					authors.add(resultSet1.getString("AUTHORNAME"));
+				}
+				book.setAuthor(authors);
 				
 				books.add(book);
 			}
 		} catch (Exception e) {
 			logger.error("Error Occured  While Establishing The Connection : " + e);
 		} finally {
+			dbConnectionUtil.closeResource(resultSet1);
 			dbConnectionUtil.closeResource(resultSet);
+			dbConnectionUtil.closeResource(statement1);
 			dbConnectionUtil.closeResource(statement);
 			dbConnectionUtil.closeResource(connection);
 		}

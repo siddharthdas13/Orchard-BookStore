@@ -18,17 +18,12 @@ import com.google.gson.Gson;
 import com.orchard.obs.core.models.Book;
 import com.orchard.obs.core.services.SideNavigationServices;
 
-@Component(service = {Servlet.class},
-			property = {
-						"sling.servlet.paths=/bin/BookByPublisherServlet",
-		                "sling.servlet.extensions=json",
-		                "sling.servlet.methods=GET"
-		                })
+@Component(service = { Servlet.class }, property = { "sling.servlet.paths=/bin/FilterBookServlet",
+		"sling.servlet.extensions=json", "sling.servlet.methods=GET" })
 
-public class BookByPublisherServlet extends SlingAllMethodsServlet {
-	private Logger logger = LoggerFactory.getLogger(BookByPublisherServlet.class);
+public class FilterBookServlet extends SlingAllMethodsServlet {
+	private Logger logger = LoggerFactory.getLogger(FilterBookServlet.class);
 
-	
 	@Reference
 	SideNavigationServices sideNavigationServices;
 	private static final long serialVersionUID = 1L;
@@ -36,13 +31,19 @@ public class BookByPublisherServlet extends SlingAllMethodsServlet {
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
-		logger.error("Inside publisher servlet");
+		logger.error("now Inside FilterBookServlet servlet");
 		response.setContentType("application/json");
-	
-		String publisher = request.getParameter("publisherName");
-		
-		List<Book> bookByPublisher = sideNavigationServices.getBookBasedOnPublisher("table", publisher);		
-		String json = new Gson().toJson(bookByPublisher);
+		List<Book> filteredBook;
+		String first = request.getParameter("first");
+		String second = request.getParameter("second");
+
+		if (first.equals("genre"))
+			filteredBook = sideNavigationServices.getBookBasedOnGenre("table", second);
+		else if (first.equals("publisher"))
+			filteredBook = sideNavigationServices.getBookBasedOnPublisher("table", second);
+		else
+			filteredBook = sideNavigationServices.getBookBasedOnGenreAndPublisher("table", first, second);
+		String json = new Gson().toJson(filteredBook);
 		response.getWriter().print(json);
 	}
 }

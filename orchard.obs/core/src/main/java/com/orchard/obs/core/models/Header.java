@@ -29,8 +29,6 @@ import com.day.cq.wcm.api.LanguageManager;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageFilter;
 import com.day.cq.wcm.api.PageManager;
-import com.orchard.obs.core.util.UrlHelper;
-import com.orchard.obs.core.util.obsHelper;
 
 @Model(adaptables = {Resource.class})
 public class Header 

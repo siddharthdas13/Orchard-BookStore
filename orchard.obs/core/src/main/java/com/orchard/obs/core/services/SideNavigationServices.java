@@ -14,4 +14,5 @@ public interface SideNavigationServices {
 
 	public List<Book> getBookBasedOnPublisher(String dataSourceName, String publisher);
 
+	public List<Book> getBookBasedOnGenreAndPublisher(String dataSourceName, String genre, String publisher);
 }

@@ -35,4 +35,9 @@ public class SideNavigationServiceImpl implements SideNavigationServices {
 		return sideNavigationDao.getBookBasedOnPublisher(dataSourceName, publisher);
 	}
 
+	@Override
+	public List<Book> getBookBasedOnGenreAndPublisher(String dataSourceName, String genre, String publisher) {
+		return sideNavigationDao.getBookBasedOnGenreAndPublisher(dataSourceName, genre, publisher);
+	}
+
 }
