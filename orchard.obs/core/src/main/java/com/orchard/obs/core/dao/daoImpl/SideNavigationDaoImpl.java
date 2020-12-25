@@ -84,7 +84,7 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 		ResultSet resultSet1 = null;
 		List<Book> books = new ArrayList<>();
 		try {
-			logger.error("Inside Connection, Source Is  {}", source);
+			logger.info("Inside getBookBasedOnGenre method");
 			statement = connection.createStatement();
 			String query = "SELECT * FROM BOOK";
 			if (!(genre.equals("all")))
@@ -96,6 +96,9 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 				book.setName(resultSet.getString("NAME"));
 				book.setLanguage(resultSet.getString("LANGUAGE"));
 				book.setPrice(resultSet.getFloat("PRICE"));
+				book.setNew(resultSet.getBoolean("NEWITEM"));
+				book.setDiscount(resultSet.getFloat("DISCOUNT"));
+				book.setBestSeller(resultSet.getBoolean("BESTSELLER"));
 				statement1 = connection.createStatement();
 				query = "SELECT DISTINCT AUTHOR.AUTHORNAME FROM AUTHOR INNER JOIN AUTHOR_BOOK ON AUTHOR.AUTHORID=AUTHOR_BOOK.AUTHORID WHERE AUTHOR_BOOK.BOOKID='"
 						+ resultSet.getString("ISBN") + "'";
@@ -105,7 +108,7 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 				while (resultSet1.next()) {
 					authors.add(resultSet1.getString("AUTHORNAME"));
 				}
-				book.setAuthor(authors);
+				book.setAuthors(authors);
 				books.add(book);
 			}
 		} catch (Exception e) {
@@ -129,7 +132,7 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 		ResultSet resultSet1 = null;
 		List<Book> books = new ArrayList<>();
 		try {
-			logger.error("Inside Connection, Source Is  {}", source);
+			logger.info("Inside getBookBasedOnPublisher method");
 			statement = connection.createStatement();
 			String query = "SELECT * FROM BOOK";
 			if (!(publisher.equals("all")))
@@ -143,7 +146,9 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 				book.setName(resultSet.getString("NAME"));
 				book.setLanguage(resultSet.getString("LANGUAGE"));
 				book.setPrice(resultSet.getFloat("PRICE"));
-
+				book.setNew(resultSet.getBoolean("NEWITEM"));
+				book.setDiscount(resultSet.getFloat("DISCOUNT"));
+				book.setBestSeller(resultSet.getBoolean("BESTSELLER"));
 				statement1 = connection.createStatement();
 				query = "SELECT DISTINCT AUTHOR.AUTHORNAME FROM AUTHOR INNER JOIN AUTHOR_BOOK ON AUTHOR.AUTHORID=AUTHOR_BOOK.AUTHORID WHERE AUTHOR_BOOK.BOOKID='"
 						+ resultSet.getString("ISBN") + "'";
@@ -153,7 +158,7 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 				while (resultSet1.next()) {
 					authors.add(resultSet1.getString("AUTHORNAME"));
 				}
-				book.setAuthor(authors);
+				book.setAuthors(authors);
 
 				books.add(book);
 			}
@@ -178,7 +183,7 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 		ResultSet resultSet1 = null;
 		List<Book> books = new ArrayList<>();
 		try {
-			logger.info("INISDE BOTH GENRE AND PUBLISHER METHOD");
+			logger.info("INISDE getBookBasedOnGenreAndPublisher METHOD");
 			statement = connection.createStatement();
 			String query = "SELECT BOOK.* FROM BOOK INNER JOIN GENRE on BOOK.GENREID=GENRE.GENREID \n"
 					+ "	INNER JOIN PUBLISHER ON BOOK.PUBLISHERID=PUBLISHER.PUBLISHERID WHERE (PUBLISHER.PUBLISHERNAME='"
@@ -191,16 +196,18 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 				book.setName(resultSet.getString("NAME"));
 				book.setLanguage(resultSet.getString("LANGUAGE"));
 				book.setPrice(resultSet.getFloat("PRICE"));
+				book.setNew(resultSet.getBoolean("NEWITEM"));
+				book.setDiscount(resultSet.getFloat("DISCOUNT"));
+				book.setBestSeller(resultSet.getBoolean("BESTSELLER"));
 				statement1 = connection.createStatement();
 				query = "SELECT AUTHOR.AUTHORNAME FROM AUTHOR INNER JOIN AUTHOR_BOOK ON AUTHOR.AUTHORID=AUTHOR_BOOK.AUTHORID WHERE AUTHOR_BOOK.BOOKID='"
 						+ resultSet.getString("ISBN") + "'";
-
 				resultSet1 = statement1.executeQuery(query);
 				List<String> authors = new ArrayList<>();
 				while (resultSet1.next()) {
 					authors.add(resultSet1.getString("AUTHORNAME"));
 				}
-				book.setAuthor(authors);
+				book.setAuthors(authors);
 				
 				books.add(book);
 			}
