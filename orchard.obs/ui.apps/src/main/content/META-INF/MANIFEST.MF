@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Content-Package-Id: deor:orchard.obs.ui.apps:0.0.1-SNAPSHOT
+Content-Package-Description: UI apps package for Online Book Store Sites
+  Project
+Content-Package-Roots: /apps/obs,/etc/packages/adobe/cq60/core.wcm.compo
+ nents.examples-2.5.0.zip,/etc/packages/adobe/cq60/core.wcm.components.a
+ ll-2.5.0.zip
+Content-Package-Type: mixed
+
