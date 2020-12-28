@@ -15,10 +15,10 @@ import com.orchard.obs.core.entity.Book;
  */
 public interface CartService {
 	
-	public List<Book> getCartDetails(String dataSourceName, int customerId) throws CartServiceException;
+	public List<Book> getCartDetails(String dataSourceName, String customerId) throws CartServiceException;
 	
-	public int updateCartDetails(String dataSourceName, String bookId, int cartQuantity, int customerId) throws CartServiceException;
+	public int updateCartDetails(String dataSourceName, String bookId, int cartQuantity, String customerId) throws CartServiceException;
 
-	public int deleteCartItem(String dataSourceName, String bookId, int customerId) throws CartServiceException;
+	public int deleteCartItem(String dataSourceName, String bookId, String customerId) throws CartServiceException;
 	
 }

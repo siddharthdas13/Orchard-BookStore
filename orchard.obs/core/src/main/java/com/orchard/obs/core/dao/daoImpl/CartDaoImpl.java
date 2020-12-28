@@ -31,7 +31,7 @@ public class CartDaoImpl implements CartDao {
 	DBUtil dbUtil;
 
 	@Override
-	public List<Book> getCartDetails(String dataSourceName, int customerId) throws CartDaoException {
+	public List<Book> getCartDetails(String dataSourceName, String customerId) throws CartDaoException {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -40,7 +40,7 @@ public class CartDaoImpl implements CartDao {
 		try {
 			connection = dbUtil.getConnection(dataSourceName);
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery("SELECT B.ISBN, B.NAME, P.PUBLISHERNAME, B.PAGECOUNT, B.EDITION, B.LANGUAGE, B.QUANTITY, B.PRICE, B.DISCOUNT, G.GENRENAME, C.QUANTITY FROM CART C JOIN BOOK B ON C.ISBN = B.ISBN INNER JOIN PUBLISHER P ON P.PUBLISHERID = B.PUBLISHERID INNER JOIN GENRE G ON G.GENREID = B.GENREID AND C.CUSTOMER_ID = " + customerId + ";");
+			resultSet = statement.executeQuery("SELECT B.ISBN, B.NAME, P.PUBLISHERNAME, B.PAGECOUNT, B.EDITION, B.LANGUAGE, B.QUANTITY, B.PRICE, B.DISCOUNT, G.GENRENAME, C.QUANTITY FROM CART C JOIN BOOK B ON C.ISBN = B.ISBN INNER JOIN PUBLISHER P ON P.PUBLISHERID = B.PUBLISHERID INNER JOIN GENRE G ON G.GENREID = B.GENREID AND C.CUSTOMER_ID = '" + customerId + "';");
 
 			while (resultSet.next()) {
 				Book book = new Book();
@@ -73,14 +73,14 @@ public class CartDaoImpl implements CartDao {
 	}
 
 	@Override
-	public int updateCartDetails(String dataSourceName, String bookId, int cartQuantity, int customerId)
+	public int updateCartDetails(String dataSourceName, String bookId, int cartQuantity, String customerId)
 			throws CartDaoException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		int status = 0;
 		try {
 			connection = dbUtil.getConnection(dataSourceName);
-			preparedStatement = connection.prepareStatement("UPDATE CART SET QUANTITY = ? WHERE ISBN = ? AND CUSTOMER_ID = " + customerId + ";");
+			preparedStatement = connection.prepareStatement("UPDATE CART SET QUANTITY = ? WHERE ISBN = ? AND CUSTOMER_ID = '" + customerId + "';");
 			preparedStatement.setInt(1, cartQuantity);
 			preparedStatement.setString(2, bookId);
 			status = preparedStatement.executeUpdate();
@@ -95,14 +95,14 @@ public class CartDaoImpl implements CartDao {
 	}
 
 	@Override
-	public int deleteCartItem(String dataSourceName, String bookId, int customerId) throws CartDaoException {
+	public int deleteCartItem(String dataSourceName, String bookId, String customerId) throws CartDaoException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		int status = 0;
 
 		try {
 			connection = dbUtil.getConnection(dataSourceName);
-			preparedStatement = connection.prepareStatement("DELETE FROM CART WHERE BOOK_ID = ? AND CUSTOMER_ID = " + customerId + ";");
+			preparedStatement = connection.prepareStatement("DELETE FROM CART WHERE BOOK_ID = ? AND CUSTOMER_ID = '" + customerId + "';");
 			preparedStatement.setString(1, bookId);
 			status = preparedStatement.executeUpdate();
 		} catch (DataSourceNotFoundException | SQLException e) {

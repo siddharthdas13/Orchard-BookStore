@@ -112,9 +112,9 @@
                                 	'<img src="/content/dam/aemContentFolder/english/' + book.name + '.jpg">',
                             	'</div>',
                             	'<div class="item-detail-block">',
-                                	'<div class="name">' + book.name + '</div>',
+                                	'<div class="item-name">' + book.name + '</div>',
                                 	'<div class="language">' + book.language + '</div>',
-                                	'<div class="price">',
+                                	'<div class="item-price">',
                                     	'<div class="discount-price">₹' + discountPrice + '</div>',
                                     	'<div class="actual-price"><s>₹' + actualPrice + '</s></div>',
                                     	'<div class="discount">' + book.discount + '% Off</div>',
@@ -127,13 +127,13 @@
                         	'</div>',
                         	'<div class="item-block-second-div">',
                             	'<div class="item-quantity-block">',
-                                	'<button class="minus" id="m' + index + '" onclick="$(this).updateCartData(' + index + ',' + (book.cartQuantity-1) + ',' + customerId + ');"> – </button>',
+                                	'<button class="minus" id="m' + index + '" onclick="$(this).updateCartData(' + index + ',' + (book.cartQuantity-1) + ',\'' + customerId + '\');"> – </button>',
                                 	'<input class="item-count" id="q' + index + '" type="number" min="1" onkeypress="return event.keyCode > 48 && event.keyCode < 57" value=' + book.cartQuantity + '>',
-                                	'<button class="plus" id="p' + index + '" onclick="$(this).updateCartData(' + index + ',' + (book.cartQuantity+1) + ',' + customerId + ');"> + </button>',
+                                	'<button class="plus" id="p' + index + '" onclick="$(this).updateCartData(' + index + ',' + (book.cartQuantity+1) + ',\'' + customerId + '\');"> + </button>',
                             '</div>',
                             '<div class="item-save-remove">',
                                 '<div class="item-save-later">SAVE FOR LATER</div>',
-                                '<div class="item-remove" onclick="$(this).removeCartItem(' + index + ',' + customerId + ')">REMOVE</div>',
+                                '<div class="item-remove" onclick="$(this).removeCartItem(' + index + ',\'' + customerId + '\')">REMOVE</div>',
                             '</div>',
                         '</div>',
                     '</div>'
@@ -192,14 +192,21 @@
         	].join("\n");
             $("#cart-block").append(Price_Details_Block);
 
-            if(totalDiscount == 0 || totalDiscount < deliveryCharge) {
+            if(totalPrice != 0) {
+        	if(totalDiscount == 0 || totalDiscount < deliveryCharge) {
             	$("#discount-div").hide();
-                $("#saved-amount").hide();
-            }
+            	$("#saved-amount").hide();
+        	}
 
-            if(deliveryCharge == 0) {
-               	$("#delivery-charges-div-right").text("FREE");
-            }
+        	if(deliveryCharge == 0) {
+            	$("#delivery-charges-div-right").text("FREE");
+        	}
+        }
+        else {
+            $("#item-block-second-div").hide();
+            $("button").prop("disabled", true);
+            $("button").css("background-color", "grey");
+        }
 		}
     	else
     		alert("Cart Is Empty!...");
@@ -313,23 +320,23 @@
     color: grey;
 }
 
-.item-detail-block .price {
+.item-detail-block .item-price {
     display: flex;
 }
 
-.price .discount-price {
+.item-price .discount-price {
     font-size: 18px;
     font-weight: bold;
 }
 
-.price .actual-price {
+.item-price .actual-price {
     margin-left: 1.5%;
     margin-right: 1.5%;
     margin-top: 1%;
     color: gray;
 }
 
-.price .discount {
+.item-price .discount {
     margin-top: 0.2%;
     font-size: 16px;
     color: #388e3c;

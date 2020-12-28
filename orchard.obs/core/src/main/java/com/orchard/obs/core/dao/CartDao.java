@@ -12,9 +12,9 @@ import com.orchard.obs.core.entity.Book;
  *
  */
 public interface CartDao {
-	public List<Book> getCartDetails(String dataSourceName, int customerId) throws CartDaoException;
+	public List<Book> getCartDetails(String dataSourceName, String customerId) throws CartDaoException;
 
-	public int updateCartDetails(String dataSourceName, String bookId, int cartQuantity, int customerId) throws CartDaoException;
+	public int updateCartDetails(String dataSourceName, String bookId, int cartQuantity, String customerId) throws CartDaoException;
 	
-	public int deleteCartItem(String dataSourceName, String bookId, int customerId) throws CartDaoException;
+	public int deleteCartItem(String dataSourceName, String bookId, String customerId) throws CartDaoException;
 }

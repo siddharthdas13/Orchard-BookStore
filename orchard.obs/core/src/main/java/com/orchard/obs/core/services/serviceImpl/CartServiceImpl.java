@@ -25,7 +25,7 @@ public class CartServiceImpl implements CartService {
 	CartDao cartDao;
 	
 	@Override
-	public List<Book> getCartDetails(String dataSourceName, int customerId) throws CartServiceException {
+	public List<Book> getCartDetails(String dataSourceName, String customerId) throws CartServiceException {
 		try {
 			return cartDao.getCartDetails(dataSourceName, customerId);
 		} catch (CartDaoException e) {
@@ -34,7 +34,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public int updateCartDetails(String dataSourceName, String bookId, int cartQuantity, int customerId)
+	public int updateCartDetails(String dataSourceName, String bookId, int cartQuantity, String customerId)
 			throws CartServiceException {
 		try {
 			return cartDao.updateCartDetails(dataSourceName, bookId, cartQuantity, customerId);
@@ -44,7 +44,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public int deleteCartItem(String dataSourceName, String bookId, int customerId) throws CartServiceException {
+	public int deleteCartItem(String dataSourceName, String bookId, String customerId) throws CartServiceException {
 		try {
 			return cartDao.deleteCartItem(dataSourceName, bookId, customerId);
 		} catch (CartDaoException e) {

@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 import com.orchard.obs.Exceptions.serviceExceptions.CartServiceException;
 import com.orchard.obs.core.services.CartService;
+import com.orchard.obs.core.util.DBUtil;
 
 /**
  * @author Rushabh
@@ -39,10 +40,13 @@ public class CartServlet extends SlingAllMethodsServlet {
 	@Reference
 	CartService cartService;
 	
+	@Reference
+	DBUtil dbUtil;
+	
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
-		int customerId = Integer.parseInt(request.getParameter("customerId"));
+		String customerId = request.getParameter("customerId");
 		
 		try {
 			if(!request.getParameterMap().containsKey("bookId")) {
