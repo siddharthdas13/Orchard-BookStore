@@ -43,7 +43,7 @@ public class LoginDaoImpl implements LoginDao {
 				resultSet.next();
 				//Populate Employee object with data from MySQL
 				customer = new Customer();
-				//customer.setCustomerId(resultSet.getInt(1));
+				customer.setId(resultSet.getString(1));
 				customer.setName(resultSet.getString(2)); 
 				customer.setPassword(resultSet.getString(3));
 			}		

@@ -35,7 +35,7 @@ $.fn.fetchCartData = function() {
                 data = JSON.parse(xhr.responseText);
                 if(data != null) {
             		var expires = 1;
-       				document.cookie = "customerId" + "=" + data.customerId + ";expires=" + expires + ";path=/";
+       				document.cookie = "customerId" + "=" + data.id + ";expires=" + expires + ";path=/";
                     succeed = true;
                 }
                 else {
