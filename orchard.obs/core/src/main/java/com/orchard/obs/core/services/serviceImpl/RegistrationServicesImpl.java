@@ -54,5 +54,4 @@ public class RegistrationServicesImpl implements RegistrationServices {
 		}
 		return status;
 	}
-
 }

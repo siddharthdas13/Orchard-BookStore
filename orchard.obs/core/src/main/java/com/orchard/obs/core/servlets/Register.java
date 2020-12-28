@@ -89,7 +89,7 @@ public class Register extends SlingAllMethodsServlet {
 		boolean set=false;
 		if(!check) {
 			try {
-				set=registrationServices.registerUser("obs", customer);			
+				set=registrationServices.registerUser("bookworm", customer);			
 			} catch (Exception e) {
 				response.getWriter().println(e.getMessage());
 			}
