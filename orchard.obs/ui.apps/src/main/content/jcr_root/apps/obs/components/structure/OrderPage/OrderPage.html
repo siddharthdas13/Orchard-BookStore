@@ -1,0 +1,418 @@
+<html>
+<head>
+<link rel="stylesheet" href="F:\xampp\htdocs\Project\Pages\abc2.css" />
+<title>
+</title>
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+data-sly-call="${clientlib.css @ categories='obsCssId.order'}"/>
+
+<script>
+$(function(){
+$.fn.val=function(){
+ $.ajax({
+         type: 'GET',    
+         url:'/bin/OrderConfirmationServlet',
+        complete: function(xhr,status){
+         var obj = JSON.parse(xhr.responseText);
+
+         document.getElementById("name").innerHTML = obj.name;
+         document.getElementById("fullAdd").innerHTML = obj.address;
+         document.getElementById("mob").innerHTML = obj.phone;
+         document.getElementById("pinCityState").innerHTML = obj.pin+" "+obj.city+" "+obj.state+" ";
+         }
+     });
+     }
+     })
+$(function() {
+	$.ajax({
+		url: '/bin/DisplayCartServlet',
+		type: 'GET',
+		complete: function(xhr, status) {
+			alert(xhr.responseText);
+
+            var item = JSON.parse(xhr.responseText);
+            var i=0;
+            var itemtotal=0;
+            var itemdis=0;
+            var quantity=0;
+            val total=0;
+            var discount=0;
+            for(i;i<2;i++)
+            {
+            quantity=quantity+item[i].quantity;
+            total+=(item[i].price);
+            discount+=(item[i].price)*(item[i].discount/100);
+            itemtotal=(((item[i].price)-(item[i].price)*(item[i].discount/100))*(item[i].quantity))+itemtotal;
+            }
+            var grandtotal=itemtotal+100;
+            document.getElementById("orderval").innerHTML = "₹ "+itemtotal+"0";
+            document.getElementById("dis").innerHTML = "₹ "+discount;
+            document.getElementById("tot").innerHTML = "₹ "+total;
+            document.getElementById("frmPaymentbutton").innerHTML = "₹"+grandtotal;
+             document.getElementById("itemCount").innerHTML = quantity + " item (s)";
+            	}
+	  });
+
+});
+$(function(){
+$.fn.placeOrder=function(){
+ $.ajax({
+         type: 'GET',    
+         url:'/bin/PlaceOrderServlet',
+        complete: function(xhr,status){
+         var obj = JSON.parse(xhr.responseText);
+
+alert(xhr.responseText);
+
+
+         }
+     });
+     }
+     })
+
+     $(document).ready(function(){
+  $("#deliverHereButton").click(function(){
+    $("#shippingDetails").hide();
+    $("#paymentOptions").show();
+  });
+});
+
+ $(document).ready(function(){
+  $("#add").click(function(){
+    $("#yourcart").hide();
+    $("#shippingDetails").show();
+  });
+});
+
+</script>
+
+</head>
+<div class="container">
+<div class="row clearfix">
+<div class="col-lg-8 col-md-7 col-sm-8 clearfix">
+<div class="panel-group accordion_spc" id="accordion_spc">
+
+<div class="col-lg-4 col-md-4 col-sm-4 clearfix" id="sidebar_summary" style="top: 15px;">
+
+<div class="or_divider">
+<hr>
+
+<div class="spc_order_summary">
+<div class="font-24 title">Order Summary</div>
+<table class="table table-responsive">
+<tbody>
+<tr>
+<td class="order_txt">Order Value</td>
+<td class="order_val" id="orderval">300.00 </td>
+</tr>
+<tr>
+<td class="product_txt">Product Discounts</td>
+<td class="product_val" id="dis">- <i class="tr tr-inr"></i>000.00 </td>
+</tr>
+<tr class="summary-shipping-row">
+<td class="shipping_txt">Shipping</td>
+<td class="shipping_val">
+<span class="gray-dark-color bold"><i class="tr tr-inr"></i>₹100.00</span> </td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="summary-grand-total-row">
+<td class="grand_txt avenirdemi">Order Total</td>
+<td class="grand_val avenirdemi" id="tot"> <i class="tr tr-inr"></i>400.00 </td>
+</tr>
+<tr class="overall-savings-row">
+<td class="overall_txt avenirdemi">Overall Savings</td>
+<td class="overall_val avenirdemi"> <i class="tr tr-inr"></i>000.00 </td>
+</tr>
+</tfoot>
+</table>
+
+
+<p class="return_text font-12">15 days return</p>
+</div>
+</div>
+</div>
+
+
+<div class="panel panel-default panel1">
+<div class="panel-heading">
+<div class="row">
+<div class="col-lg-3 col-md-4 col-sm-3 imp">
+<h4 class="panel-title font-14">
+1. Your Cart <span class="item_count" id="itemCount">1 item (s)</span>
+</h4>
+</div>
+<div class="col-lg-9 col-md-8 col-sm-9">
+<div class="panel_details cart_details" style="display: none;">
+<span class="cart_completed" style="display: inline;">
+
+</span>
+<a data-toggle="collapse" data-parent="#accordion_spc" href="#yourcart">Edit</a>
+</div>
+</div>
+</div>
+</div>
+<div id="yourcart" class="panel-collapse collapse in">
+<div class="panel-body" id="productblock">
+
+<div class="chckOutProductBlock">
+<div class="productBlock  clearfix">
+<div class="productBlock__img">
+<div class="aspectContainer loadingAnimation">
+<img src="/content/dam/obs/en/OrderImages/scion.jpg" class="img-responsive b-error b-error" alt="Book">
+</div>
+</div>
+<div class="productBlock__desc">
+<div class="productBlock__desc--name
+<a onclick="" href="" class="text-bold  font-11">
+</a>
+</div>
+<div class="productBlock__desc--price">
+<div class="clearfix">
+<span class="actual_price clearfix" id="itemprice"><i class="tr tr-inr"></i>300.00</span>
+<span class="discounted_price text-bold" id="discountprice"><i class="tr tr-inr"></i>300.00</span> </div>
+</div>
+
+<ul class="productDetailedDesc">
+
+<li>Item price: <span class="productprice"><i class="tr tr-inr"></i></span></li>
+<li>
+Qty: <select name="quantity" class="quantity_974262 form-control" id="cboQuantity" data-frmid="block" onchange="fnSelectQty(this);">
+<option value="1 " selected="">1 </option>
+<option value="2 ">2 </option>
+<option value="3 ">3 </option>
+</select>
+</li>
+</ul>
+<ul class="productBlock__desc--options quickViewBlk">
+<li><a href="">Move to wishlist</a></li>
+
+<li><a href="">Remove</a></li>
+</ul>
+</div>
+
+</div>
+
+<button id="add" onclick="$(this).val()"  class="orange-btn-md font-14 color-white orange-bg place_order_btn ">Continue</button>
+<!--<input type="submit" data-id="shipping" value="CONTINUE" class="orange-btn-md font-14 color-white orange-bg place_order_btn ">-->
+</div>
+<input type="hidden" value="https://www.pantaloons.com/checkoutsummary?step=1&amp;id=5194569" name="redirect" id="redirect">
+<form action="cart/updateProduct" method="post" id="updateCheckoutEdit" name="updateCheckoutEdit">
+<input type="hidden" name="intOldProductAttributeID" id="hdnOldProductAttributeID" value="">
+<input type="hidden" name="intProductAttributeID" id="hdnNewProductAttributeID" value="">
+<input type="hidden" name="intProductID" id="intProductID" value="">
+<input type="hidden" name="intQuantity" id="hdnQuantity">
+<input type="hidden" name="hdnSelectedProdSizeQV" id="hdnSelectedProdSizeQV">
+<input type="hidden" id="oldSizeVal" name="oldSizeVal" value="">
+</form>
+</div>
+</div>
+<input type="hidden" name="panel1_status" value="completed" id="panel1_status">
+</div>
+
+
+<div class="panel panel-default panel3" id="shippingDetailPanel">
+<div class="panel-heading ">
+<div class="row">
+<div class="col-lg-3 col-md-4 col-sm-3">
+<h4 class="panel-title font-14">
+3. Shipping Details
+</h4>
+</div>
+<div class="col-lg-9 col-md-8 col-sm-9">
+<div class="panel_details shipping_details" style="display: none;">
+<svg xmlns="http://www.w3.org/2000/svg" width="13.888" height="10.143" viewBox="0 0 13.888 10.143">
+<defs>
+<style>.a_tick{fill:none;stroke:#49b441;stroke-width:1.5px;}</style>
+</defs>
+<path class="a_tick" d="M-6197-13683.726l4.275,4.276,8.552-8.552" transform="translate(6197.53 13688.531)"></path>
+</svg>
+<span class="panel_detail_label">Default Address : </span><span class="panel_detail_value"></span>
+<a data-toggle="collapse" data-parent="#accordion_spc" href="#shippingDetails" class="">Edit</a>
+</div>
+<span id="shipping_address_label">
+<input style="display: none;" type="checkbox" class="" id="chkCustomerNewShippingAddress">
+<label style="float: right; text-decoration: underline; cursor: pointer;" for="chkCustomerNewShippingAddress" class="info_text font-12">Add new shipping address</label>
+</span>
+</div>
+</div>
+</div>
+<div id="shippingDetails" class="panel-collapse collapse in" style="display:none">
+<div class="panel-body">
+<div class="clearfix shippingForm">
+<div id="divFlashMessages"></div>
+<div class="shippingFormdiv" style="display:none;">
+<div class="col-lg-12 col-md-12 col-sm-12">
+<div class="form-group zip_code">
+<div class="row">
+
+
+<span class="font-11"></span>
+</div>
+</div>
+</div>
+</div>
+<div class="new_address_form myaccInputBlock addrFormContent">
+<div class="clearfix">
+<div class="form-group firstname col-lg-6 col-sm-6 col-xs-6 noLpad">
+<input autocomplete="on" type="text" maxlength="80" class="form-control" id="add_firstname" name="firstname" value="" required="" data-bv-field="firstname">
+<label for="add_firstname" class="control-label label">First Name *</label> <small class="has_error_msg error_msg spnFirstNameError err_msg" data-bv-for="firstname" data-bv-result="NOT_VALIDATED" style="display: none;"></small>
+</div>
+<div class="form-group lastname col-lg-6 col-sm-6 col-xs-6 noLpad">
+<input autocomplete="on" type="text" maxlength="80" class="form-control" id="add_lastname" name="lastname" value="" required="" data-bv-field="lastname">
+<label for="add_lastname" class="control-label label">Last Name </label> <small class="has_error_msg sleCustomerShippingLastName err_msg" style="display: none;"></small>
+</div>
+<div class="form-group  address1 col-lg-12 col-sm-12 col-xs-12 noLpad">
+<input autocomplete="on" type="text" maxlength="60" class="form-control" id="add_address1" name="address1" required="" data-bv-field="address1">
+<label for="add_address1" class="control-label label">Address Line 1 *</label> <small class="has_error_msg sleCustomerShippingAddress1 err_msg" style="display: none;"></small>
+</div>
+<div class="clearfix dynamic-address-input"></div>
+<a class="text-bold addAddressLine" href="javascript:void(0);">+ Address line</a>
+<div class="form-group addressLandMark col-lg-12 col-xs-12 col-md-12 noLpad">
+<input autocomplete="on" type="text" maxlength="60" class="form-control" id="add_address4" name="address4" required="" data-bv-field="addressLandMark">
+<label for="add_addressLandMark" class="control-label label add_land_mark">Land Mark</label> <small class="has_error_msg sleCustomerShippingAddress4 err_msg" data-bv-validator="notEmpty" data-bv-for="addressLandMark" data-bv-result="NOT_VALIDATED" style="display: none;"></small>
+</div>
+<div class="form-group city col-lg-6 col-sm-6 col-xs-6 noLpad">
+<input autocomplete="on" type="text" maxlength="50" class="form-control city_name" id="add_city" name="city" required="" data-bv-field="city" value="" disabled="">
+<label for="add_city" class="control-label add_land_mark label">City *</label> <input type="hidden" name="shippingcity" id="add_hdn_city" class="hdnCity">
+</div>
+<div class="form-group state col-lg-6 col-xs-6 col-sm-6 noLpad">
+<input autocomplete="on" type="text" maxlength="50" class="form-control state_name" id="add_state" name="state" required="" data-bv-field="state" value="" disabled="">
+<label for="add_state" class="control-label add_land_mark label">State *</label> <input type="hidden" name="shippingstate" id="add_hdn_state" class="hdnState">
+</div>
+<input type="hidden" name="shippingcountry" id="add_hdn_country" class="hdnCountry" value="">
+<div class="form-group phone_mobile col-lg-12 col-md-12 col-sm-12 col-xs-12 noLpad">
+<input autocomplete="on" type="text" maxlength="10" class="form-control" id="add_mobile" name="phone_mobile" value="" required="" data-bv-field="phone_mobile">
+<label for="add_mobile" class="control-label label">Mobile Number *</label> <small class="has_error_msg sleCustomerShippingMobile err_msg" style="display: none; font-size:12px;"></small>
+</div>
+<div class="mydefault-address col-lg-12 col-md-12 col-sm-12 col-xs-12 noLpad">
+<div class="mydefault-address-label">
+<input type="checkbox" class="checkbox-custom-lgray" id="mydefaultAddress" name="default_address" value="1">
+<label for="mydefaultAddress" class="font-11">Make this my default address </label>
+</div>
+</div>
+<div class="alias_block col-lg-12 col-md-12 col-sm-12 col-xs-12 noLpad">
+<p>Save address as</p>
+<div class="width-30 alias_radio form-group">
+<input type="radio" value="home" checked="" id="home_address" name="alias" class="radiobtn-custom-orange form-control">
+<label class="top font-12" for="home_address">Home</label>
+</div>
+<div class="width-30 alias_radio form-group">
+<input type="radio" value="office" id="office_address" name="alias" class="radiobtn-custom-orange form-control">
+<label class="top font-12" for="office_address">Office</label>
+</div>
+<div class="width-30 alias_radio form-group">
+<input type="radio" value="other_address" id="other_address" name="alias" class="radiobtn-custom-orange form-control">
+<label class="top font-12" for="other_address">Other</label>
+</div>
+<small class=" err_msg" data-bv-validator="notEmpty" data-bv-for="alias" data-bv-result="NOT_VALIDATED" style="display: none;"></small>
+</div>
+<div class="form-group otherAlias col-lg-12 col-sm-12 col-xs-12 noLpad" style="display: none">
+<input autocomplete="on" type="text" maxlength="50" class="form-control" id="otherAlias" name="otherAlias" required="">
+<label for="otherAlias" class="control-label add_land_mark label">Other Name *</label> <small class="sleCustomerShippingAlias err_msg" data-bv-validator="regexp" data-bv-for="city" data-bv-result="NOT_VALIDATED" style="display: none;"></small>
+</div>
+</div>
+<div class="clearfix address_action_buttons">
+<a href="javascript:void(0);" class="width-30 btn btn-black-border cancel_button">CANCEL</a>
+<a href="javascript:void(0);" id="save_address" class="orange-btn-md orange-bg color-white width-30 save_address">SAVE TO ACCOUNT</a>
+</div>
+</div>
+</form> </div>
+<div class="editshippingFormdiv" style="display: none;"></div>
+</div>
+<div class="saved_addresses">
+<div class="row address_block mCustomScrollbar _mCS_2 mCS_no_scrollbar"><div id="mCSB_2" class="mCustomScrollBox mCS-dark-3 mCSB_vertical mCSB_inside" tabindex="0" style="max-height: none;"><div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+<div class="col-lg-12 col-md-12 imp addressMainContent">
+<div class="saved_addresses_block saved_address_2109986 active">
+<div class="saved_addresses_block_selectBox pull-left">
+<input type="radio" class="checkbox-custom-lgray savedAddressSelectbox " id="savedAddressSelectbox" name="savedAddressradio">
+<label class="font-11"> </label>
+</div>
+<div class="saved_addressDetails pull-left">
+<div class="user_address font-12">
+<p class="user_name font-14" id="name">Kirti Pandey</p>
+<p class="address_alias font-12">home </p><a  class="edit_address">Edit</a>
+<p class="default_address font-11" style="display:none;">Default Address</p>
+<p id="fullAdd">M/31 Railway colony Dhanpuri</p>
+<p id="pinCityState">484114 Shahdol M.P.</p>
+</div>
+<div class="user_contact">
+<svg xmlns="http://www.w3.org/2000/svg" width="8.609" height="14.8" viewBox="0 0 8.609 14.8"><defs><style>.a_contact{fill:none;stroke:#000;stroke-width:0.8px;}</style></defs><g transform="translate(-155.085 -928.25)"><g transform="translate(129.885 924.15)"><path class="a_contact" d="M32.242,4.5H26.736A1.129,1.129,0,0,0,25.6,5.62V17.333A1.159,1.159,0,0,0,26.736,18.5h5.507a1.175,1.175,0,0,0,1.167-1.167V5.62A1.146,1.146,0,0,0,32.242,4.5Zm.887,12.833a.883.883,0,0,1-.887.871H26.736a.866.866,0,0,1-.856-.871V5.62a.84.84,0,0,1,.856-.84h5.507a.867.867,0,0,1,.887.84Z"></path><circle cx="0.653" cy="0.653" r="0.653" transform="translate(28.851 16.276)"></circle></g><line class="a_contact" x2="8" transform="translate(155.5 931.5)"></line><line class="a_contact" x2="8" transform="translate(155.5 939.5)"></line></g></svg>
+<span class="font-14" id="mob">8269932856</span>
+</div>
+<input type="submit" onclick="" value="Deliver here" class="orange-btn-md font-14 color-white orange-bg text-uppercase deliverButtonText" id="deliverHereButton">
+<div class="expected_delivery">
+<svg xmlns="http://www.w3.org/2000/svg" width="16.026" height="16.214" viewBox="0 0 16.026 16.214"><defs><style>.a_delivery{fill:none;stroke:#000;}</style></defs><g transform="translate(-401.317 -861.452)"><path class="a_delivery" d="M1687.458,714.837l14-5.237-5.146,14.154-3.106-5.7Z" transform="translate(-1284.956 152.7)"></path><path d="M1789.3,822.975l6.105-4.062-4.263,5.93" transform="translate(-1382.405 46.891)"></path></g></svg>
+<span class="font-11">Expected delivery within 3 to 4 business days</span>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<input type="hidden" name="panel3_status" value="" id="panel3_status">
+</div>
+</div>
+
+</div>
+
+<div class="panel panel-default panel4">
+<div class="panel-heading active">
+<div class="row">
+<div class="col-lg-3 col-md-4 col-sm-3">
+<h4 class="panel-title font-14">
+4. Payment Options
+</h4>
+</div>
+<div class="col-lg-9 col-md-8 col-sm-9">
+<div class="panel_details payment_details" style="display: none;" >
+<svg xmlns="http://www.w3.org/2000/svg" width="13.888" height="10.143" viewBox="0 0 13.888 10.143">
+<defs>
+<style>.a_tick{fill:none;stroke:#49b441;stroke-width:1.5px;}</style>
+</defs>
+<path class="a_tick" d="M-6197-13683.726l4.275,4.276,8.552-8.552" transform="translate(6197.53 13688.531)"></path>
+</svg>
+<span class="panel_detail_label">Payment Options : </span><span class="panel_detail_value"></span>
+<a data-toggle="collapse" data-parent="#accordion_spc" href="#paymentOptions" class="">Edit</a>
+</div>
+</div>
+</div>
+</div>
+<div id="paymentOptions" class="panel-collapse collapse in" style="display:none">   
+ <div class="panel-body">
+       
+            <div class="chkout_cart_view clearfix">
+			
+			<div class="payment_row_view" style="padding: 15px 22px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;">
+			
+            <div class="radio">
+  <label><input type="radio" name="optradio" name="paymenttype" id="rdCashOnDevelivery" checked>COD</label>
+</div>
+  </div>
+  																							                        <button onclick="$(this).placeOrder()" id="frmPaymentbutton"  class="orange-btn-md font-14 color-white orange-bg pay-btn" >PAY ₹0000</button>
+						                </div>
+            </div>
+		    </div>
+</div>
+<input type="hidden" name="panel4_status" value="" id="panel4_status">
+</div>
+
+
+
+
+</div>
+</div>
+ 
+</div>
+</div>
+
+</div>
+</div>
+ 
+</div>
+</html>
