@@ -7,6 +7,8 @@ data-sly-call="${clientlib.css @ categories='obs.base'}"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<sly data-sly-include="cartmodal.html" data-sly-unwrap></sly>
+
 <head>
 <div class="head">
       <img src="/content/dam/obs/en/images/icon.png" alt="bookstore logo"  id="logo" height=200px width:200px />
@@ -29,10 +31,17 @@ data-sly-call="${clientlib.css @ categories='obs.base'}"/>
 
 <ul class="navcart">
 
-	<li>
-      <!--a href="login.html"--><i class="fa fa-user-circle" style="font-size:30px;" ></i><!--/a--></li>
+<li>
+      <!--a href="login.html"--><i class="fa fa-user-circle" style="font-size:30px;" ></i><!--/a-->
+             <ul  class="dropdown-content">
+             <li>Profile</li>
+             <li id="login-btn" onclick="$(this).login()">Login</li>
+             <li id="logout-btn" onclick="$(this).logout()">Logout</li>
+             </ul>
 
-    <li style="padding-left:20px"> <!--a href="cart.html"--><i class="fa fa-shopping-cart" style="font-size:30px;" ></i><!--/a-->
+        </li>
+
+    <li id="cart" onclick="$(this).cart()"> <!--a href="cart.html"--><i class="fa fa-shopping-cart" style="font-size:30px;" ></i><!--/a-->
     </li>
    </ul>
 
@@ -40,3 +49,48 @@ data-sly-call="${clientlib.css @ categories='obs.base'}"/>
 </div>
 
 </head>
+
+<script>
+	$(function() {
+    	var customerId = -1;
+    	var status = 0;
+		var name = "customerId" + "=";
+    	var ca = document.cookie.split(';');
+  		for(var i = 0; i < ca.length; i++) {
+    		var c = ca[i];
+    		while (c.charAt(0) == ' ') {
+      			c = c.substring(1);
+    		}
+    		if (c.indexOf(name) == 0) {
+      			customerId = c.substring(name.length, c.length);
+            	status = 1;
+    		}
+  		}
+
+    	$.fn.login = function() {
+    		document.location.href = "login.html";
+    	}
+
+   		$.fn.logout = function() {
+    		document.cookie = "customerId=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT";
+        	location.reload();
+    	}
+
+		$.fn.cart = function() {
+    		if(customerId == -1) {
+        		alert("Please Login!..");
+        	}
+        	else
+        		$(this).fetchCartData(customerId);
+    	}
+
+		if(status == 1) {
+			$("#login-btn").css("display", "none");
+			$("#logout-btn").css("display", "inline-block");
+    	}
+    	else {
+        	$("#login-btn").css("display", "inline-block");
+			$("#logout-btn").css("display", "none");
+    	}
+    });
+</script>
