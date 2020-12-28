@@ -38,11 +38,11 @@ public class FilterBookServlet extends SlingAllMethodsServlet {
 		String second = request.getParameter("second");
 
 		if (first.equals("genre"))
-			filteredBook = sideNavigationServices.getBookBasedOnGenre("table", second);
+			filteredBook = sideNavigationServices.getBookBasedOnGenre("bookworm", second);
 		else if (first.equals("publisher"))
-			filteredBook = sideNavigationServices.getBookBasedOnPublisher("table", second);
+			filteredBook = sideNavigationServices.getBookBasedOnPublisher("bookworm", second);
 		else
-			filteredBook = sideNavigationServices.getBookBasedOnGenreAndPublisher("table", first, second);
+			filteredBook = sideNavigationServices.getBookBasedOnGenreAndPublisher("bookworm", first, second);
 		String json = new Gson().toJson(filteredBook);
 		response.getWriter().print(json);
 	}

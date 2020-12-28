@@ -70,15 +70,16 @@ function generateTiles(data) {
 				'<div class="product-block">',
 				'<div class="image-block">',
 				'<div class="product-image">',
-				'<img src="/content/dam/BookStore/en/images/books/abc.jpg>',
+				'<img src="/content/dam/obs/en/images/books/',data[x].name,'.jpg">',
 				'</div>',
 				'<div class="hover-block">',
 				'<a href="http://www.google.com"><button class="add-to-cart" target="_blank">ADD TO CART</button></a>',
 				'<a href="http://www.google.com"><button class="view-detail">VIEW DETAILS</button></a>',
-				'</div>',
-				'<div class="bestseller-label">',
-				'<img src="https://www.sapnaonline.com/static/images/sapna/bestseller.svg">',
-				'</div>', '<div class="discount-label">', '<label>30%</label>',
+				'</div>'].join("\n");
+        if(data[x].isBestSeller){
+				html+='<div class="bestseller-label"><img src="https://www.sapnaonline.com/static/images/sapna/bestseller.svg"></div>';
+				 }
+				html+=[ '<div class="discount-label">', '<label>',data[x].discount,'%</label>',
 				'</div>', '</div>', '<div class="product-detail">',
 				'<div class="book-name"><b>', data[x].name, '</b></div>',
 				'<div class="hover-product-detail">',
@@ -86,9 +87,11 @@ function generateTiles(data) {
 				'</i></label>', '<br>', '<label><b>Language</b></label>',
 				'<label class="language"><i>', data[x].language,
 				'</i></label>', '</div>', '<div class="price">&#8377;',
-				data[x].price, '/-</div>', '</div>',
-				'<div class="new-product-label">', '<label>New</label>',
-				'</div>', '</div>', '</section>' ].join("\n");
+				data[x].price, '/-</div>', '</div>'].join("\n");
+		if(data[x].isNew){
+				html+='<div class="new-product-label"><label>New</label></div>';
+		}
+				html+='</div></section>' ;
 	}
 	html += '</section>';
 	document.getElementById("ab").innerHTML = html;

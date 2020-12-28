@@ -7,18 +7,23 @@ public class Book {
 	private float price;
 	private List<String> authors;
 	private String language;
-	
+	private float discount;
+	private boolean isNew;
+	private boolean isBestSeller;
 	
 	public Book() {
 		super();
 	}
 
-	public Book(String name, float price, List<String> authors, String language) {
+	public Book(String name, float price, List<String> authors, String language,float discount,boolean isNew,boolean isBestSeller) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.authors = authors;
 		this.language = language;
+		this.discount=discount;
+		this.isNew=isNew;
+		this.isBestSeller=isBestSeller;
 	}
 
 	/**
@@ -50,16 +55,16 @@ public class Book {
 	}
 
 	/**
-	 * @return the author
+	 * @return the authors
 	 */
 	public List<String> getAuthors() {
 		return authors;
 	}
 
 	/**
-	 * @param author the author to set
+	 * @param authors the authors to set
 	 */
-	public void setAuthor(List<String> authors) {
+	public void setAuthors(List<String> authors) {
 		this.authors = authors;
 	}
 
@@ -75,6 +80,48 @@ public class Book {
 	 */
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	/**
+	 * @return the discount
+	 */
+	public float getDiscount() {
+		return discount;
+	}
+
+	/**
+	 * @param discount the discount to set
+	 */
+	public void setDiscount(float discount) {
+		this.discount = discount;
+	}
+
+	/**
+	 * @return the isNew
+	 */
+	public boolean isNew() {
+		return isNew;
+	}
+
+	/**
+	 * @param isNew the isNew to set
+	 */
+	public void setNew(boolean isNew) {
+		this.isNew = isNew;
+	}
+
+	/**
+	 * @return the isBestSeller
+	 */
+	public boolean isBestSeller() {
+		return isBestSeller;
+	}
+
+	/**
+	 * @param isBestSeller the isBestSeller to set
+	 */
+	public void setBestSeller(boolean isBestSeller) {
+		this.isBestSeller = isBestSeller;
 	}
 	
 	
