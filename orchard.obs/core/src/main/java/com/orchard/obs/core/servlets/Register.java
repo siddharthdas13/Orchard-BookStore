@@ -81,7 +81,7 @@ public class Register extends SlingAllMethodsServlet {
 		customer.setMail(mail);
 		boolean check=false;
 		try {
-			check=registrationServices.checkDuplicateMail("obs",mail);
+			check=registrationServices.checkDuplicateMail("bookworm",mail);
 		} catch (CustomerServiceExceptions e1) {
 			// TODO Auto-generated catch block
 			response.getWriter().println(e1.getMessage());
