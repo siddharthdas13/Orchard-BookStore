@@ -6,4 +6,6 @@ import com.orchard.obs.core.models.Customer;
 public interface RegistrationServices {
 	
 	public boolean registerUser(String dataSourceName,Customer customer)throws CustomerServiceExceptions;
+
+	public boolean checkDuplicateMail(String dataSourceName, String mail)throws CustomerServiceExceptions;
 }

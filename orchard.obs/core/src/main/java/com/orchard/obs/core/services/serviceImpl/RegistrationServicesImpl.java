@@ -1,5 +1,8 @@
 package com.orchard.obs.core.services.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
@@ -32,4 +35,23 @@ public class RegistrationServicesImpl implements RegistrationServices {
 		return status;
 	}
 
+	@Override
+	public boolean checkDuplicateMail(String dataSourceName, String mail) throws CustomerServiceExceptions {
+		List<String> list=new ArrayList<String>();
+		boolean status=false;
+		try {
+			list=dao.checkDuplicateMail(dataSourceName,mail);
+			if(list.size()>0) {
+				for(int i=0;i<list.size();i++) {
+					if(list.get(i).equals(mail)) {
+						status=true;
+						break;
+					}
+				}
+			}
+		} catch (CustomerDaoExceptions e) {
+			throw new CustomerServiceExceptions(e.getMessage());
+		}
+		return status;
+	}
 }
