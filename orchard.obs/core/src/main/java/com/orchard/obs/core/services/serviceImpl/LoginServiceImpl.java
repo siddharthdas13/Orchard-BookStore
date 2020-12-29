@@ -3,6 +3,7 @@
  */
 package com.orchard.obs.core.services.serviceImpl;
 
+import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import com.orchard.obs.Exceptions.daoexceptions.LoginDaoException;
@@ -15,6 +16,7 @@ import com.orchard.obs.core.services.LoginService;
  * @author Rushabh
  *
  */
+@Component(service = LoginService.class, immediate = true)
 public class LoginServiceImpl implements LoginService {
 
 	@Reference
@@ -29,5 +31,4 @@ public class LoginServiceImpl implements LoginService {
 			throw new LoginServiceException(e);
 		}
 	}
-
 }

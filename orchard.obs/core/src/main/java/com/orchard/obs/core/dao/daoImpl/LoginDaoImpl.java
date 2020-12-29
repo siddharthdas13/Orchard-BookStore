@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import com.day.commons.datasource.poolservice.DataSourceNotFoundException;
@@ -20,8 +21,8 @@ import com.orchard.obs.core.util.DBUtil;
  * @author Rushabh
  *
  */
+@Component(service = LoginDao.class, immediate = true)
 public class LoginDaoImpl implements LoginDao {
-
 
 	@Reference
 	DBUtil dbUtil;
@@ -47,6 +48,7 @@ public class LoginDaoImpl implements LoginDao {
 				customer.setName(resultSet.getString(2)); 
 				customer.setPassword(resultSet.getString(3));
 			}		
+			return customer;
 		} catch (DataSourceNotFoundException | SQLException e) {
 			throw new LoginDaoException(e);
 		}
@@ -55,7 +57,6 @@ public class LoginDaoImpl implements LoginDao {
 			dbUtil.closeResource(preparedStatement);
 			dbUtil.closeResource(connection);
 		}
-		return new Customer();
 	}
 
 }
