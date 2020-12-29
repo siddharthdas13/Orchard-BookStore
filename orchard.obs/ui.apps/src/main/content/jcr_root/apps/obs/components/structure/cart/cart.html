@@ -3,21 +3,30 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	$(function() {
-    	var customerId;
-    	var name = "customerId" + "=";
-  					var ca = document.cookie.split(';');
-  					for(var i = 0; i < ca.length; i++) {
-    					var c = ca[i];
-    					while (c.charAt(0) == ' ') {
-      						c = c.substring(1);
-    					}
-    					if (c.indexOf(name) == 0) {
-      						customerId = c.substring(name.length, c.length);
-    					}
-  					} 
-		$(this).fetchCartData(customerId);
-    });
+$(function() {
+	var customerId = -1;
+    var status = 0;
+	var name = "customerId" + "=";
+    var ca = document.cookie.split(';');
+
+  	for(var i = 0; i < ca.length; i++) {
+    	var c = ca[i];
+    	while (c.charAt(0) == ' ') {
+      		c = c.substring(1);
+    	}
+    	if (c.indexOf(name) == 0) {
+      		customerId = c.substring(name.length, c.length);
+            status = 1;
+    	}
+  	}
+
+    if(status == 1) {
+    	$(this).fetchCartData(customerId);
+    }
+    else {
+        $("#cart-modal").html("Login To View Cart!...");
+    }
+});
 
 	$.fn.fetchCartData = function(customerId) {
 		$.ajax({
@@ -84,20 +93,18 @@
 	}
 
 	$.fn.loadCartData = function(bookData, customerId) {
-   		$("#cart-block").remove();
+   		$("#cart-block").empty();
 		if(bookData.length != 0) {
         	$(".modal").css("display", "block");
         	var totalPrice = 0, totalDiscount = 0, deliveryCharge = 0, totalAmount = 0, totalAmountSaved = 0;
         	var cartBlock = [
-           		'<div id="cart-block">',
-                	'<div id="cart-block-first-block">',
-                    	'<div id="header">',
-                        	'<div id="label">My Cart (' + bookData.length + ')</div>',
-                        '</div>',
+            	'<div id="cart-block-first-block">',
+                	'<div id="header">',
+                    	'<div id="label">My Cart (' + bookData.length + ')</div>',
                     '</div>',
                 '</div>'
 			].join("\n");
-			$("body").append(cartBlock);
+			$("#cart-block").append(cartBlock);
 
 			$.each(bookData, function(index, book) {
 				discountPrice = (((100-book.discount)/100)*book.price*book.cartQuantity);
@@ -209,74 +216,26 @@
         }
 		}
     	else
-    		alert("Cart Is Empty!...");
+    		$("#cart-block").html("<h3>Cart Is Empty!...</h3>");
 	}
-
-    $(".close").click(function() {
-		$(".modal").hide();
-    });
-
-    $(window).click(function(e) {
-        if(e.target.id == "myModal") {
-        	$("#myModal").hide();
-        }
-    });
 </script>
 
+<div id="cart-block">
+</div>
+
 <style>
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; 
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  padding-top: 100px;
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  padding: 40px;
-  width: 50%;
-  height: 250px;
-  overflow: auto; 
-  border-radius: 10px;
-  margin: auto;
-}
-
-/* The Close Button */
-.close {
-  position: fixed;
-  color: #aaaaaa;
-  font-size: 28px;
-  font-weight: bold;
-  margin-left: 760px;
-  margin-top: -35px;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}    
-
 #cart-block {
-   display: flex;
+	display: flex;
+    width: 80%;
+    margin: auto;
 }
 
 #cart-block-first-block {
-    flex: 0 0 60%;
+    flex: 0 1 60%;
 }
 
 #cart-block-second-block {
-    flex: 0 0 40%;
+    flex: 0 1 40%;
     margin-left: 0.75%;
 }
 
@@ -312,7 +271,7 @@
     line-height: 1.8;
 }
 
-.item-detail-block .name {
+.item-detail-block .item-name {
     font-weight: 700;
 }
 

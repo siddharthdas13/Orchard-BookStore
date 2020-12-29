@@ -1,13 +1,5 @@
 <!--sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
-data-sly-call="${clientlib.css @ categories='cart.site'}"/-->
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-	<!-- Modal content -->
-    <div class="modal-content">
-    	<span class="close">&times;</span>
-    </div>
-</div>
+data-sly-call="${clientlib.all @ categories='obs.base'}"/-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -213,6 +205,14 @@ $(window).click(function(e) {
 });
 </script>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+	<!-- Modal content -->
+    <div class="modal-content">
+    	<span class="close">&times;</span>
+    </div>
+</div>
+
 <style>
 /* The Modal (background) */
 .modal {
@@ -256,16 +256,6 @@ $(window).click(function(e) {
   text-decoration: none;
   cursor: pointer;
 }    
-
-#cart-block {
-}
-
-#cart-block-first-block {
-}
-
-#cart-block-second-block {
-    margin-left: 0.75%;
-}
 
 #header, .item-block, .place-order-block {            
     box-shadow: 0 0 1px 1px lightgrey;
