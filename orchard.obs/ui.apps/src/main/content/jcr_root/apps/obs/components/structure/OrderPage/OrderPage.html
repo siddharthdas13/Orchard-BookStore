@@ -28,27 +28,55 @@ $(function() {
 		url: '/bin/DisplayCartServlet',
 		type: 'GET',
 		complete: function(xhr, status) {
-			alert(xhr.responseText);
 
             var item = JSON.parse(xhr.responseText);
             var i=0;
             var itemtotal=0;
             var itemdis=0;
             var quantity=0;
-            val total=0;
+            var total=0;
             var discount=0;
-            for(i;i<2;i++)
+                var tot=0;
+            for(i;i<item.length;i++)
             {
             quantity=quantity+item[i].quantity;
             total+=(item[i].price);
             discount+=(item[i].price)*(item[i].discount/100);
             itemtotal=(((item[i].price)-(item[i].price)*(item[i].discount/100))*(item[i].quantity))+itemtotal;
+var disPrice=(item[i].price)-((item[i].price)*(item[i].discount)/100);
+tot=tot+disPrice;
+                    var pro_Block = [
+                    '<div class="productBlock  clearfix" id="productBlockClearfix">',
+'<div class="productBlock__img">',
+'<div class="aspectContainer loadingAnimation">',
+'<img src="" class="img-responsive b-error b-error" alt="Book">',
+'</div>',
+'</div>',
+'<div class="productBlock__desc">',
+'<div class="productBlock__desc--name>',
+'<a onclick="" href="" class="text-bold  font-11">',
+'</a>',
+'</div>',
+'<div class="productBlock__desc--price">',
+'<div class="clearfix">',
+'<span class="actual_price clearfix"> ₹ '+item[i].price+'</span>',
+'<span class="discounted_price text-bold">₹ '+disPrice+'</span>',
+ '</div>',
+'</div>',
+'<li>Item price: <span class="productpric">₹ '+disPrice+'</span></li>',
+'</ul>',
+'</div>',
+'</div>'
+].join("\n");
+                     $("#checkoutProduct").append(pro_Block);
+
             }
             var grandtotal=itemtotal+100;
-            document.getElementById("orderval").innerHTML = "₹ "+itemtotal+"0";
+            document.getElementById("orderval").innerHTML = "₹ "+total;
             document.getElementById("dis").innerHTML = "₹ "+discount;
-            document.getElementById("tot").innerHTML = "₹ "+total;
-            document.getElementById("frmPaymentbutton").innerHTML = "₹"+grandtotal;
+            document.getElementById("tot").innerHTML = "₹ "+tot;
+            document.getElementById("frmPaymentbutton").innerHTML = "PAY  ₹ "+grandtotal;
+                document.getElementById("saving").innerHTML = "₹ "+discount;
              document.getElementById("itemCount").innerHTML = quantity + " item (s)";
             	}
 	  });
@@ -62,7 +90,7 @@ $.fn.placeOrder=function(){
         complete: function(xhr,status){
          var obj = JSON.parse(xhr.responseText);
 
-alert(xhr.responseText);
+
 
 
          }
@@ -107,22 +135,22 @@ alert(xhr.responseText);
 </tr>
 <tr>
 <td class="product_txt">Product Discounts</td>
-<td class="product_val" id="dis">- <i class="tr tr-inr"></i>000.00 </td>
+<td class="product_val" id="dis">- 000.00 </td>
 </tr>
 <tr class="summary-shipping-row">
 <td class="shipping_txt">Shipping</td>
 <td class="shipping_val">
-<span class="gray-dark-color bold"><i class="tr tr-inr"></i>₹100.00</span> </td>
+<span class="gray-dark-color bold">₹ 100.00</span> </td>
 </tr>
 </tbody>
 <tfoot>
 <tr class="summary-grand-total-row">
 <td class="grand_txt avenirdemi">Order Total</td>
-<td class="grand_val avenirdemi" id="tot"> <i class="tr tr-inr"></i>400.00 </td>
+<td class="grand_val avenirdemi" id="tot"> 400.00 </td>
 </tr>
 <tr class="overall-savings-row">
 <td class="overall_txt avenirdemi">Overall Savings</td>
-<td class="overall_val avenirdemi"> <i class="tr tr-inr"></i>000.00 </td>
+<td class="overall_val avenirdemi" id="saving"> 000.00 </td>
 </tr>
 </tfoot>
 </table>
@@ -152,11 +180,13 @@ alert(xhr.responseText);
 </div>
 </div>
 </div>
+
 <div id="yourcart" class="panel-collapse collapse in">
 <div class="panel-body" id="productblock">
 
-<div class="chckOutProductBlock">
-<div class="productBlock  clearfix">
+<div class="chckOutProductBlock" id="checkoutProduct">
+
+<!--
 <div class="productBlock__img">
 <div class="aspectContainer loadingAnimation">
 <img src="/content/dam/obs/en/OrderImages/scion.jpg" class="img-responsive b-error b-error" alt="Book">
@@ -176,38 +206,18 @@ alert(xhr.responseText);
 <ul class="productDetailedDesc">
 
 <li>Item price: <span class="productprice"><i class="tr tr-inr"></i></span></li>
-<li>
-Qty: <select name="quantity" class="quantity_974262 form-control" id="cboQuantity" data-frmid="block" onchange="fnSelectQty(this);">
-<option value="1 " selected="">1 </option>
-<option value="2 ">2 </option>
-<option value="3 ">3 </option>
-</select>
-</li>
-</ul>
-<ul class="productBlock__desc--options quickViewBlk">
-<li><a href="">Move to wishlist</a></li>
 
-<li><a href="">Remove</a></li>
 </ul>
-</div>
 
 </div>
+-->
 
+</div>
 <button id="add" onclick="$(this).val()"  class="orange-btn-md font-14 color-white orange-bg place_order_btn ">Continue</button>
 <!--<input type="submit" data-id="shipping" value="CONTINUE" class="orange-btn-md font-14 color-white orange-bg place_order_btn ">-->
 </div>
-<input type="hidden" value="https://www.pantaloons.com/checkoutsummary?step=1&amp;id=5194569" name="redirect" id="redirect">
-<form action="cart/updateProduct" method="post" id="updateCheckoutEdit" name="updateCheckoutEdit">
-<input type="hidden" name="intOldProductAttributeID" id="hdnOldProductAttributeID" value="">
-<input type="hidden" name="intProductAttributeID" id="hdnNewProductAttributeID" value="">
-<input type="hidden" name="intProductID" id="intProductID" value="">
-<input type="hidden" name="intQuantity" id="hdnQuantity">
-<input type="hidden" name="hdnSelectedProdSizeQV" id="hdnSelectedProdSizeQV">
-<input type="hidden" id="oldSizeVal" name="oldSizeVal" value="">
-</form>
+
 </div>
-</div>
-<input type="hidden" name="panel1_status" value="completed" id="panel1_status">
 </div>
 
 
