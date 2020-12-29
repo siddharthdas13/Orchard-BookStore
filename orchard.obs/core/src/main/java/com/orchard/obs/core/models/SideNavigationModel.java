@@ -22,8 +22,8 @@ public class SideNavigationModel {
 
 	@PostConstruct
 	protected void init() {
-		bookGenres = sideNavigationServices.getBookGenres("table");
-		bookPublishers = sideNavigationServices.getBookPublishers("table");
+		bookGenres = sideNavigationServices.getBookGenres("bookworm");
+		bookPublishers = sideNavigationServices.getBookPublishers("bookworm");
 	}
 
 	public List<String> getBookGenres() {
