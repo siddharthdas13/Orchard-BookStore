@@ -15,8 +15,8 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import com.day.commons.datasource.poolservice.DataSourceNotFoundException;
-import com.orchard.obs.Exceptions.daoexceptions.CartDaoException;
-import com.orchard.obs.core.dao.CartDao;
+import com.orchard.obs.Exceptions.daoexceptions.WishlistDaoException;
+import com.orchard.obs.core.dao.WishlistDao;
 import com.orchard.obs.core.entity.Book;
 import com.orchard.obs.core.entity.Cart;
 import com.orchard.obs.core.util.DBUtil;
@@ -25,23 +25,23 @@ import com.orchard.obs.core.util.DBUtil;
  * @author Rushabh
  *
  */
-@Component(immediate =  true, service = CartDao.class)
-public class CartDaoImpl implements CartDao {
+@Component(immediate =  true, service = WishlistDao.class)
+public class WishlistDaoImpl implements WishlistDao {
 
 	@Reference
 	DBUtil dbUtil;
-
+	
 	@Override
-	public List<Cart> getCartDetails(String dataSourceName, String customerId) throws CartDaoException {
+	public List<Cart> getWishlistDetails(String dataSourceName, String customerId) throws WishlistDaoException {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		List<Cart> cartItems = new ArrayList<Cart>();
+		List<Cart> wishlistItems = new ArrayList<Cart>();
 
 		try {
 			connection = dbUtil.getConnection(dataSourceName);
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery("SELECT B.BOOKID, B.NAME, P.PUBLISHERNAME, B.PAGECOUNT, B.EDITION, B.LANGUAGE, B.QUANTITY, B.PRICE, B.DISCOUNT, G.GENRENAME, C.QUANTITY FROM CART C JOIN BOOK B ON C.BOOKID = B.BOOKID INNER JOIN PUBLISHER P ON P.PUBLISHERID = B.PUBLISHERID INNER JOIN GENRE G ON G.GENREID = B.GENREID AND C.CUSTOMER_ID = '" + customerId + "';");
+			resultSet = statement.executeQuery("SELECT B.BOOKID, B.NAME, P.PUBLISHERNAME, B.PAGECOUNT, B.EDITION, B.LANGUAGE, B.QUANTITY, B.PRICE, B.DISCOUNT, G.GENRENAME FROM WishList W JOIN BOOK B ON W.BOOKID = B.BOOKID INNER JOIN PUBLISHER P ON P.PUBLISHERID = B.PUBLISHERID INNER JOIN GENRE G ON G.GENREID = B.GENREID AND W.CUSTOMER_ID = '" + customerId + "';");
 
 			while (resultSet.next()) {
 				Cart cart = new Cart();
@@ -61,13 +61,13 @@ public class CartDaoImpl implements CartDao {
 				book.setGenre(resultSet.getString(10));
 				
 				cart.setBook(book);
-				cart.setCartQuantity(resultSet.getInt(11));
+				cart.setCartQuantity(1);
 				
 				//Push the Employee Object to the list
-				cartItems.add(cart);
+				wishlistItems.add(cart);
 			} 	
 		} catch (DataSourceNotFoundException | SQLException e) {
-			throw new CartDaoException(e);
+			throw new WishlistDaoException(e);
 		}
 
 		finally {
@@ -75,74 +75,52 @@ public class CartDaoImpl implements CartDao {
 			dbUtil.closeResource(statement);
 			dbUtil.closeResource(connection);
 		}
-		return cartItems;
+		return wishlistItems;
 	}
 
 	@Override
-	public int updateCartDetails(String dataSourceName, String bookId, int cartQuantity, String customerId)
-			throws CartDaoException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		int status = 0;
-		try {
-			connection = dbUtil.getConnection(dataSourceName);
-			preparedStatement = connection.prepareStatement("UPDATE CART SET QUANTITY = ? WHERE BOOKID = ? AND CUSTOMER_ID = '" + customerId + "';");
-			preparedStatement.setInt(1, cartQuantity);
-			preparedStatement.setString(2, bookId);
-			status = preparedStatement.executeUpdate();
-		} catch (DataSourceNotFoundException | SQLException e) {
-			throw new CartDaoException(e);
-		}
-		finally {
-			dbUtil.closeResource(preparedStatement);
-			dbUtil.closeResource(connection);
-		}
-		return status;
-	}
-
-	@Override
-	public int deleteCartItem(String dataSourceName, String bookId, String customerId) throws CartDaoException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		int status = 0;
-
-		try {
-			connection = dbUtil.getConnection(dataSourceName);
-			preparedStatement = connection.prepareStatement("DELETE FROM CART WHERE BOOKID = ? AND CUSTOMER_ID = ?;");
-			preparedStatement.setString(1, bookId);
-			preparedStatement.setString(2, customerId);
-			status = preparedStatement.executeUpdate();
-		} catch (DataSourceNotFoundException | SQLException e) {
-			throw new CartDaoException(e);
-		}
-		finally {
-			dbUtil.closeResource(preparedStatement);
-			dbUtil.closeResource(connection);
-		}
-		return status;
-	}
-
-	@Override
-	public int addBookToWishlist(String dataSourceName, String bookId, String customerId) throws CartDaoException {
+	public int addBookToCart(String dataSourceName, String bookId, String customerId) throws WishlistDaoException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 
 		try {
 			connection = dbUtil.getConnection(dataSourceName);
-			preparedStatement = connection.prepareStatement("INSERT INTO WISHLIST VALUES(?, ?, ?);");
-			preparedStatement.setString(1, "");
+			preparedStatement = connection.prepareStatement("INSERT INTO CART VALUES(?, ?, ?);");
+			preparedStatement.setString(1, customerId);
 			preparedStatement.setString(2, bookId);
-			preparedStatement.setString(3, customerId);
+			preparedStatement.setInt(3, 1);
 			return preparedStatement.executeUpdate();				
 		} catch (DataSourceNotFoundException | SQLException e) {
-			throw new CartDaoException(e.getCause());
+			throw new WishlistDaoException(e.getCause());
 		}
 		finally {
 			dbUtil.closeResource(resultSet);
 			dbUtil.closeResource(preparedStatement);
 			dbUtil.closeResource(connection);
 		}
+	}
+
+	@Override
+	public int deleteWishlistItem(String dataSourceName, String bookId, String customerId) throws WishlistDaoException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int status = 0;
+
+		try {
+			connection = dbUtil.getConnection(dataSourceName);
+			preparedStatement = connection.prepareStatement("DELETE FROM WishList WHERE BOOKID = ? AND CUSTOMER_ID = ?;");
+			preparedStatement.setString(1, bookId);
+			preparedStatement.setString(2, customerId);
+			status = preparedStatement.executeUpdate();
+		} catch (DataSourceNotFoundException | SQLException e) {
+			throw new WishlistDaoException(e);
+		}
+		finally {
+			dbUtil.closeResource(preparedStatement);
+			dbUtil.closeResource(connection);
+		}
+		return status;
 	}
 
 }

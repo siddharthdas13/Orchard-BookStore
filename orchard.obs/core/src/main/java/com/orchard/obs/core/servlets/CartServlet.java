@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 import com.orchard.obs.Exceptions.serviceExceptions.CartServiceException;
 import com.orchard.obs.core.services.CartService;
-import com.orchard.obs.core.util.DBUtil;
 
 /**
  * @author Rushabh
@@ -40,29 +39,32 @@ public class CartServlet extends SlingAllMethodsServlet {
 	@Reference
 	CartService cartService;
 	
-	@Reference
-	DBUtil dbUtil;
-	
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String customerId = request.getParameter("customerId");
+		String action = request.getParameter("action");
 		
 		try {
-			if(!request.getParameterMap().containsKey("bookId")) {
+			if(action.equals("getcartdata")) {
 				response.getWriter().println(new Gson().toJson(cartService.getCartDetails("bookworm", customerId)));
 			}
-			else if(request.getParameterMap().containsKey("bookId") && request.getParameterMap().containsKey("quantity")){
+			else if(action.equals("updatecartdata")){
 				String bookId = request.getParameter("bookId");
 				int cartQuantity = Integer.valueOf(request.getParameter("quantity")); 
 				response.getWriter().println(cartService.updateCartDetails("bookworm", bookId, cartQuantity, customerId));
 			}
-			else if(request.getParameterMap().containsKey("bookId")){
+			else if (action.equals("addtowishlist")) {
+				String bookId = request.getParameter("bookId");
+				response.getWriter().println(cartService.addBookToWishlist("bookworm", bookId, customerId));
+			}
+			else if(action.equals("removecartitem")){
 				String bookId = request.getParameter("bookId");
 				response.getWriter().println(cartService.deleteCartItem("bookworm", bookId, customerId));
 			}
 		} catch (CartServiceException e) {
-			logger.info(e.getMessage());
+			response.getWriter().println(e.getCause());
 		}
 	}
 

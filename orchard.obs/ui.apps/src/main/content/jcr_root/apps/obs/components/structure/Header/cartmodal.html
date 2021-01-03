@@ -8,12 +8,13 @@ $.fn.fetchCartData = function(customerId) {
 		url: '/bin/obs/cartservlet',
 		type: 'POST',
         data: {
-        	customerId: customerId
+        	customerId: customerId,
+            action: "getcartdata"
         },
 		complete: function(xhr, status) {
         	if (status == "success") {
-            	bookData = JSON.parse(xhr.responseText);
-                $(this).loadCartData(bookData, customerId);
+            	cartData = JSON.parse(xhr.responseText);
+                $(this).loadCartData(cartData, customerId);
             }
             else {
             	alert("Error");
@@ -27,15 +28,16 @@ $.fn.updateCartData = function(index, quantity, customerId) {
 		url: '/bin/obs/cartservlet',
 		type: 'POST',
 		data: {
-			bookId: bookData[index].id,
+			bookId: (cartData[index].book).id,
             quantity: quantity,
-            customerId: customerId
+            customerId: customerId,
+            action: "updatecartdata"
 		},
 		complete: function(xhr, status) {
         	if (status == "success") {
             	if(xhr.responseText > 0) {
-                	bookData[index].cartQuantity = quantity;
-                    $(this).loadCartData(bookData, customerId);
+                	cartData[index].cartQuantity = quantity;
+                    $(this).loadCartData(cartData, customerId);
                 }
             }
             else {
@@ -50,14 +52,18 @@ $.fn.removeCartItem = function(index, customerId) {
 		url: '/bin/obs/cartservlet',
 		type: 'POST',
 		data: {
-			bookId: bookData[index].id,
-            customerId: customerId
+			bookId: (cartData[index].book).id,
+            customerId: customerId,
+            action: "removecartitem"
 		},
 		complete: function(xhr, status) {
         	if (status == "success") {
             	if(xhr.responseText > 0) {
-					bookData.splice(index, 1);
-                    $(this).loadCartData(bookData, customerId);
+					cartData.splice(index, 1);
+                    if(cartData.length != 0)
+                    	$(this).loadCartData(cartData, customerId);
+                   	else
+                    	$("#myModal").hide();
                 }
             }
             else {
@@ -67,27 +73,28 @@ $.fn.removeCartItem = function(index, customerId) {
 	});
 }
 
-$.fn.loadCartData = function(bookData, customerId) {
+$.fn.loadCartData = function(cartData, customerId) {
    	$("#cart-block").remove();
-	if(bookData.length != 0) {
+	if(cartData.length != 0) {
         $(".modal").css("display", "block");
         var totalPrice = 0, totalDiscount = 0, deliveryCharge = 0, totalAmount = 0, totalAmountSaved = 0;
         var cartBlock = [
            	'<div id="cart-block">',
                 '<div id="cart-block-first-block">',
                     '<div id="header">',
-                        '<div id="label">My Cart (' + bookData.length + ')</div>',
+                        '<div id="label">My Cart (' + cartData.length + ')</div>',
                     '</div>',
                 '</div>',
             '</div>'
 		].join("\n");
 		$(".modal-content").append(cartBlock);
 
-		$.each(bookData, function(index, book) {
-			discountPrice = (((100-book.discount)/100)*book.price*book.cartQuantity);
-            actualPrice = (book.price*book.cartQuantity);
+		$.each(cartData, function(index, item) {
+        	book = item.book;
+			discountPrice = (((100-book.discount)/100)*book.price*item.cartQuantity);
+            actualPrice = (book.price*item.cartQuantity);
             totalPrice += discountPrice;
-            totalDiscount += (book.discount*book.price*book.cartQuantity/100);
+            totalDiscount += (book.discount*book.price*item.cartQuantity/100);
 
 			var Item_Block = [
 				'<div class="item-block">',
@@ -111,9 +118,9 @@ $.fn.loadCartData = function(bookData, customerId) {
                     '</div>',
                     '<div class="item-block-second-div">',
                     	'<div class="item-quantity-block">',
-                        	'<button class="minus" id="m' + index + '" onclick="$(this).updateCartData(' + index + ',' + (book.cartQuantity-1) + ',\'' + customerId + '\');"> – </button>',
-                            '<input class="item-count" id="q' + index + '" type="number" min="1" onkeypress="return event.keyCode > 48 && event.keyCode < 57" value=' + book.cartQuantity + '>',
-                            '<button class="plus" id="p' + index + '" onclick="$(this).updateCartData(' + index + ',' + (book.cartQuantity+1) + ',\'' + customerId + '\');"> + </button>',
+                        	'<button class="minus" id="m' + index + '" onclick="$(this).updateCartData(' + index + ',' + (item.cartQuantity-1) + ',\'' + customerId + '\');"> – </button>',
+                            '<input class="item-count" id="q' + index + '" type="number" min="1" onkeypress="return event.keyCode > 48 && event.keyCode < 57" value=' + item.cartQuantity + '>',
+                            '<button class="plus" id="p' + index + '" onclick="$(this).updateCartData(' + index + ',' + (item.cartQuantity+1) + ',\'' + customerId + '\');"> + </button>',
                         '</div>',
                         '<div class="item-save-remove">',
                         	'<div class="item-save-later">SAVE FOR LATER</div>',
@@ -124,7 +131,7 @@ $.fn.loadCartData = function(bookData, customerId) {
 			].join("\n");
             $("#cart-block-first-block").append(Item_Block);
 
-            if(book.cartQuantity > 1) {
+            if(item.cartQuantity > 1) {
             	$("#m"+index).prop("disabled", false);
             }
             else {
@@ -151,7 +158,7 @@ $.fn.loadCartData = function(bookData, customerId) {
                	'</div>',
                	'<div id="price-details-block-second-div">',
                    	'<div id="price-div">',
-                        '<div id="price-div-left">Price (item ' + bookData.length + ')</div>',
+                        '<div id="price-div-left">Price (item ' + cartData.length + ')</div>',
                         '<div id="price-div-right">₹' + totalPrice + '</div>',
                     '</div>',
                     '<div id="discount-div">',
@@ -194,8 +201,9 @@ $.fn.loadCartData = function(bookData, customerId) {
     	alert("Cart Is Empty!...");
 }
 
-$(".close").click(function() {
-	$(".modal").hide();
+$(".modal").click(function() {
+	/* $("#myModal").hide(); */
+    alert("hiuyhb");
 });
 
 $(window).click(function(e) {

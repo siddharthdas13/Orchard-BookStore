@@ -3,34 +3,40 @@
  */
 package com.orchard.obs.core.entity;
 
+import java.util.Date;
+
 /**
  * @author Rushabh
  *
  */
 public class Book {
-	private int price, quantity, cartQuantity, discount, pageCount;
-	private String id, name, author, category, language, publisher, edition;
+	private int price, quantity, discount, pageCount;
+	private Long isbn[];
+	private String id, name, author[], genre, language, publisher, edition, description;
+	private Date publishDate;
 	
 	public Book() {
 		super();
 	}
 
-	public Book(String id, int price, String name, String author, String category, String language) {
+	public Book(int price, int quantity, int discount, int pageCount, Long[] isbn, String id, String name,
+			String[] author, String genre, String language, String publisher, String edition, String description,
+			Date publishDate) {
 		super();
-		this.id = id;
 		this.price = price;
+		this.quantity = quantity;
+		this.discount = discount;
+		this.pageCount = pageCount;
+		this.isbn = isbn;
+		this.id = id;
 		this.name = name;
 		this.author = author;
-		this.category = category;
+		this.genre = genre;
 		this.language = language;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
+		this.publisher = publisher;
+		this.edition = edition;
+		this.description = description;
+		this.publishDate = publishDate;
 	}
 
 	public int getPrice() {
@@ -41,52 +47,12 @@ public class Book {
 		this.price = price;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(String language) {
-		this.language = language;
-	}
-
 	public int getQuantity() {
 		return quantity;
 	}
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-	}
-
-	public int getCartQuantity() {
-		return cartQuantity;
-	}
-
-	public void setCartQuantity(int cartQuantity) {
-		this.cartQuantity = cartQuantity;
 	}
 
 	public int getDiscount() {
@@ -105,6 +71,54 @@ public class Book {
 		this.pageCount = pageCount;
 	}
 
+	public Long[] getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(Long[] isbn) {
+		this.isbn = isbn;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String[] getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String[] author) {
+		this.author = author;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
 	public String getPublisher() {
 		return publisher;
 	}
@@ -119,6 +133,22 @@ public class Book {
 
 	public void setEdition(String edition) {
 		this.edition = edition;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getPublishDate() {
+		return publishDate;
+	}
+
+	public void setPublishDate(Date publishDate) {
+		this.publishDate = publishDate;
 	}
 	
 }
