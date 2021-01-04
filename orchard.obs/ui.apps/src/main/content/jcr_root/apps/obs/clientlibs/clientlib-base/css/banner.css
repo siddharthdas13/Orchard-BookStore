@@ -1,0 +1,9 @@
+.banner_background{margin-right:auto;margin-left:auto;height:400px;position:relative;}
+.banner_text{bottom:0;position:absolute;padding:10px;}
+.banner_link{
+        text-decoration:none;
+    	color:white;
+}
+.banner_link:hover{
+            color:white;
+}

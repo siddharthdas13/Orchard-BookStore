@@ -1,0 +1,43 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientlib.css @ categories='obs.base'}"/>
+
+
+<div data-sly-use.banner="com.orchard.obs.core.models.BannerModel"></div>
+
+
+<div class="banner_background">
+        <a href='${banner.hreflink}.html'><img src='${banner.bgimage}' style="width:100%;height:100%;"></a>
+
+         <div data-sly-test="${banner.position=='bottom_left'}">
+            <div class="banner_text" style="left:0;bottom:0;color:${banner.textcolor @ context='styleToken'};">
+                <p><font size="${banner.fontsize}">${banner.heading}</font></p>
+                <p>${banner.description}</p>
+                    <a class="banner_link" style="color:${banner.textcolor @ context='styleToken'};" href='${banner.hreflink}.html'>${banner.buttontext}</a>
+            </div>
+
+       </div>
+     
+     
+        <div data-sly-test="${banner.position=='bottom_right'}">
+                <div class="banner_text" style="right:0;botom:0;color:${banner.textcolor @ context='styleToken'};">
+                    	<p><font size="${banner.fontsize}">${banner.heading}</font></p>
+                    	<p>${banner.description}</p>
+                        <a class="banner_link" style="color:${banner.textcolor @ context='styleToken'};" href='${banner.hreflink}.html'>${banner.buttontext}</a>
+                </div>
+        </div>
+
+        <div data-sly-test="${banner.position=='top_left'}">
+                <div class="banner_text" style="left:0;top:0;color:${banner.textcolor @ context='styleToken'};">
+                    	<p><font size="${banner.fontsize}">${banner.heading}</font></p> 
+                    	<p>${banner.description}</p>
+                        <a class="banner_link" style="color:${banner.textcolor @ context='styleToken'};" href='${banner.hreflink}.html'>${banner.buttontext}</a>
+                </div>
+        </div>
+
+        <div data-sly-test="${banner.position=='top_right'}">
+                <div class="banner_text" style="right:0;top:0;color:${banner.textcolor @ context='styleToken'};">
+                    	<p><font size="${banner.fontsize}">${banner.heading}</font></p>
+                    	<p>${banner.description}</p>
+                        <a class="banner_link" style="color:${banner.textcolor @ context='styleToken'};" href='${banner.hreflink}.html'>${banner.buttontext}</a>
+                </div>
+        </div>
+</div>

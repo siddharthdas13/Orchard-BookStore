@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Form Text Field"
+    sling:resourceType="cq/gui/components/authoring/dialog"
+    extraClientlibs="[core.wcm.components.form.text.v2.editor]"
+    helpPath="https://www.adobe.com/go/aem_cmp_form_text_v2"
+    trackingFeature="core-components:form-text:v2">
+    <content
+        granite:class="cmp-form-text__editDialog"
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <tab1
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Properties"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <bg-image
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                                                fieldDescription="Enter Copyright Text"
+                                                fieldLabel="BackgroundImage"
+                                                name="./bgimage"/>
+                                            <text_x0020_Align
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/select"
+                                                fieldDescription="Enter Copyright Text"
+                                                fieldLabel="Text Position"
+                                                name="./position">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <bottom_left
+                                                        jcr:primaryType="nt:unstructured"
+                                                        name="./bottom_left"
+                                                        text="bottom_left"
+                                                        title="bottom_left"
+                                                        value="bottom_left"/>
+                                                    <bottom_right
+                                                        jcr:primaryType="nt:unstructured"
+                                                        name="./bottom_right"
+                                                        text="bottom_right"
+                                                        title="bottom_right"
+                                                        value="bottom_right"/>
+                                                    <top_left
+                                                        jcr:primaryType="nt:unstructured"
+                                                        name="./top_left"
+                                                        text="top_left"
+                                                        title="top_left"
+                                                        value="top_left"/>
+                                                    <top_right
+                                                        jcr:primaryType="nt:unstructured"
+                                                        name="./top_right"
+                                                        text="top_right"
+                                                        title="top_right"
+                                                        value="top_right"/>
+                                                </items>
+                                            </text_x0020_Align>
+                                            <Headingtext
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                                emptyText="place"
+                                                fieldDescription="Enter Copyright Text"
+                                                fieldLabel="Heading Text"
+                                                name="./heading"/>
+                                            <HeadingSize_x0028_px_x0029_
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/numberfield"
+                                                emptyText="Width"
+                                                fieldDescription="Enter Copyright Text"
+                                                fieldLabel="Heading Size(px)"
+                                                name="./fontsize"/>
+                                            <description
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/textarea"
+                                                emptyText="Description"
+                                                fieldDescription="Enter Copyright Text"
+                                                fieldLabel=" Description Text"
+                                                name="./description"/>
+                                            <buttonText
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                                fieldLabel="Button Text "
+                                                name="./buttontext"/>
+                                            <link
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                                                fieldLabel="Path"
+                                                name="./hreflink"/>
+                                            <text-color
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+                                                fieldLabel="Text Color"
+                                                name="./textcolor"/>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </tab1>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

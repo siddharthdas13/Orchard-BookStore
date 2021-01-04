@@ -7,3 +7,4 @@ Register.css
 product_tile.css
 Login.css
 sideNavigation.css
+banner.css
