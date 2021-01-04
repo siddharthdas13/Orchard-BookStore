@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
+import com.orchard.obs.Exceptions.serviceExceptions.SideNavigationServiceException;
 import com.orchard.obs.core.models.Book;
 import com.orchard.obs.core.services.SideNavigationServices;
 
@@ -36,14 +37,19 @@ public class FilterBookServlet extends SlingAllMethodsServlet {
 		List<Book> filteredBook;
 		String first = request.getParameter("first");
 		String second = request.getParameter("second");
+		try {
+			if (first.equals("genre"))
 
-		if (first.equals("genre"))
-			filteredBook = sideNavigationServices.getBookBasedOnGenre("bookworm", second);
-		else if (first.equals("publisher"))
-			filteredBook = sideNavigationServices.getBookBasedOnPublisher("bookworm", second);
-		else
-			filteredBook = sideNavigationServices.getBookBasedOnGenreAndPublisher("bookworm", first, second);
-		String json = new Gson().toJson(filteredBook);
-		response.getWriter().print(json);
+				filteredBook = sideNavigationServices.getBookBasedOnGenre("bookworm", second);
+
+			else if (first.equals("publisher"))
+				filteredBook = sideNavigationServices.getBookBasedOnPublisher("bookworm", second);
+			else
+				filteredBook = sideNavigationServices.getBookBasedOnGenreAndPublisher("bookworm", first, second);
+			String json = new Gson().toJson(filteredBook);
+			response.getWriter().print(json);
+		} catch (SideNavigationServiceException e) {
+			logger.info(e.getMessage());
+		}
 	}
 }

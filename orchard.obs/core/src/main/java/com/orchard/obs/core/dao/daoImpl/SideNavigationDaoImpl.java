@@ -2,6 +2,7 @@ package com.orchard.obs.core.dao.daoImpl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,25 +12,35 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.day.commons.datasource.poolservice.DataSourceNotFoundException;
 import com.day.commons.datasource.poolservice.DataSourcePool;
+import com.orchard.obs.Exceptions.daoexceptions.SideNavigationDaoException;
 import com.orchard.obs.core.dao.SideNavigationDao;
 import com.orchard.obs.core.models.Book;
 import com.orchard.obs.core.services.SideNavigationServices;
 import com.orchard.obs.core.util.DBConnectionUtil;
+import com.orchard.obs.core.util.DBUtil;
 
 @Component(immediate = true, service = SideNavigationDao.class)
 public class SideNavigationDaoImpl implements SideNavigationDao {
 
 	private Logger logger = LoggerFactory.getLogger(SideNavigationServices.class);
 	@Reference
-	DBConnectionUtil dbConnectionUtil;
+	DBUtil dbConnectionUtil;
 
 	@Reference
 	DataSourcePool source;
 
 	@Override
-	public List<String> getBookGenres(String dataSourceName) {
-		Connection connection = dbConnectionUtil.getConnection(dataSourceName);
+	public List<String> getBookGenres(String dataSourceName) throws SideNavigationDaoException {
+		Connection connection;
+		try {
+			connection = dbConnectionUtil.getConnection(dataSourceName);
+		} catch (DataSourceNotFoundException e1) {
+			throw new SideNavigationDaoException(e1);
+		} catch (SQLException e1) {
+			throw new SideNavigationDaoException(e1);
+		}
 		Statement statement = null;
 		ResultSet resultSet = null;
 		List<String> genres = new ArrayList<>();
@@ -52,8 +63,15 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 	}
 
 	@Override
-	public List<String> getBookPublishers(String dataSourceName) {
-		Connection connection = dbConnectionUtil.getConnection(dataSourceName);
+	public List<String> getBookPublishers(String dataSourceName) throws SideNavigationDaoException{
+		Connection connection;
+		try {
+			connection = dbConnectionUtil.getConnection(dataSourceName);
+		} catch (DataSourceNotFoundException e1) {
+			throw new SideNavigationDaoException(e1);
+		} catch (SQLException e1) {
+			throw new SideNavigationDaoException(e1);
+		}
 		Statement statement = null;
 		ResultSet resultSet = null;
 		List<String> publishers = new ArrayList<>();
@@ -76,8 +94,15 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 	}
 
 	@Override
-	public List<Book> getBookBasedOnGenre(String dataSourceName, String genre) {
-		Connection connection = dbConnectionUtil.getConnection(dataSourceName);
+	public List<Book> getBookBasedOnGenre(String dataSourceName, String genre) throws SideNavigationDaoException {
+		Connection connection;
+		try {
+			connection = dbConnectionUtil.getConnection(dataSourceName);
+		} catch (DataSourceNotFoundException e1) {
+			throw new SideNavigationDaoException(e1);
+		} catch (SQLException e1) {
+			throw new SideNavigationDaoException(e1);
+		}
 		Statement statement = null;
 		Statement statement1 = null;
 		ResultSet resultSet = null;
@@ -101,7 +126,7 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 				book.setBestSeller(resultSet.getBoolean("BESTSELLER"));
 				statement1 = connection.createStatement();
 				query = "SELECT DISTINCT AUTHOR.AUTHORNAME FROM AUTHOR INNER JOIN AUTHOR_BOOK ON AUTHOR.AUTHORID=AUTHOR_BOOK.AUTHORID WHERE AUTHOR_BOOK.BOOKID='"
-						+ resultSet.getString("ISBN") + "'";
+						+ resultSet.getString("BOOKID") + "'";
 
 				resultSet1 = statement1.executeQuery(query);
 				List<String> authors = new ArrayList<>();
@@ -124,8 +149,15 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 	}
 
 	@Override
-	public List<Book> getBookBasedOnPublisher(String dataSourceName, String publisher) {
-		Connection connection = dbConnectionUtil.getConnection(dataSourceName);
+	public List<Book> getBookBasedOnPublisher(String dataSourceName, String publisher) throws SideNavigationDaoException {
+		Connection connection;
+		try {
+			connection = dbConnectionUtil.getConnection(dataSourceName);
+		} catch (DataSourceNotFoundException e1) {
+			throw new SideNavigationDaoException(e1);
+		} catch (SQLException e1) {
+			throw new SideNavigationDaoException(e1);
+		}
 		Statement statement = null;
 		Statement statement1 = null;
 		ResultSet resultSet = null;
@@ -151,7 +183,7 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 				book.setBestSeller(resultSet.getBoolean("BESTSELLER"));
 				statement1 = connection.createStatement();
 				query = "SELECT DISTINCT AUTHOR.AUTHORNAME FROM AUTHOR INNER JOIN AUTHOR_BOOK ON AUTHOR.AUTHORID=AUTHOR_BOOK.AUTHORID WHERE AUTHOR_BOOK.BOOKID='"
-						+ resultSet.getString("ISBN") + "'";
+						+ resultSet.getString("BOOKID") + "'";
 
 				resultSet1 = statement1.executeQuery(query);
 				List<String> authors = new ArrayList<>();
@@ -175,8 +207,15 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 	}
 
 	@Override
-	public List<Book> getBookBasedOnGenreAndPublisher(String dataSourceName, String genre, String publisher) {
-		Connection connection = dbConnectionUtil.getConnection(dataSourceName);
+	public List<Book> getBookBasedOnGenreAndPublisher(String dataSourceName, String genre, String publisher) throws SideNavigationDaoException {
+		Connection connection;
+		try {
+			connection = dbConnectionUtil.getConnection(dataSourceName);
+		} catch (DataSourceNotFoundException e1) {
+			throw new SideNavigationDaoException(e1);
+		} catch (SQLException e1) {
+			throw new SideNavigationDaoException(e1);
+		}
 		Statement statement = null;
 		Statement statement1 = null;
 		ResultSet resultSet = null;
@@ -201,7 +240,7 @@ public class SideNavigationDaoImpl implements SideNavigationDao {
 				book.setBestSeller(resultSet.getBoolean("BESTSELLER"));
 				statement1 = connection.createStatement();
 				query = "SELECT AUTHOR.AUTHORNAME FROM AUTHOR INNER JOIN AUTHOR_BOOK ON AUTHOR.AUTHORID=AUTHOR_BOOK.AUTHORID WHERE AUTHOR_BOOK.BOOKID='"
-						+ resultSet.getString("ISBN") + "'";
+						+ resultSet.getString("BOOKID") + "'";
 				resultSet1 = statement1.executeQuery(query);
 				List<String> authors = new ArrayList<>();
 				while (resultSet1.next()) {
