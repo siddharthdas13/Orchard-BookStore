@@ -1,28 +1,32 @@
 package com.orchard.obs.core.entity;
 
 public class MyProducts {
-	private String isbn;
+	private String book_id;
 	private String name;
 	private double price;
 	private double discount;
 	private int quantity;
+	private String author;
+	private String language;
+	private String publisher;
+	private String edition;
 	public MyProducts() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public MyProducts(String isbn, String name, double price, double discount, int quantity) {
 		super();
-		this.isbn = isbn;
+		this.book_id = isbn;
 		this.name = name;
 		this.price = price;
 		this.discount = discount;
 		this.quantity=quantity;
 	}
-	public String getIsbn() {
-		return isbn;
+	public String getBook_id() {
+		return book_id;
 	}
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
+	public void setBook_id(String isbn) {
+		this.book_id = isbn;
 	}
 	public String getName() {
 		return name;
@@ -47,6 +51,30 @@ public class MyProducts {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public String getLanguage() {
+		return language;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	public String getPublisher() {
+		return publisher;
+	}
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+	public String getEdition() {
+		return edition;
+	}
+	public void setEdition(String edition) {
+		this.edition = edition;
 	}
 	
 }

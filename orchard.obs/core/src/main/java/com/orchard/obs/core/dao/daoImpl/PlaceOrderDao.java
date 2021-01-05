@@ -39,10 +39,10 @@ public class PlaceOrderDao {
 				PreparedStatement statement = null;
 				ResultSet rs=null;
 				Statement stmt=null;
-				String sql="insert into orders_new values(?,?,?,?)";
+				String sql="insert into orders values(?,?,?,?)";
 				String orderno="";
 				try {
-					logger.error("Inside Connection, Source Is {}", source);
+					logger.info("Inside Connection, Source Is {}", source);
 					dataSource = (DataSource) source.getDataSource(dataSourceName);
 					connection = dataSource.getConnection();
 					logger.info("Working : {}", connection);
@@ -53,19 +53,20 @@ public class PlaceOrderDao {
 					statement.setString(4,dtf.format(now) );
 					statement.execute();
 					stmt=connection.createStatement();
-					sql="select max(order_id) from orders_new where customer_id="+"'"+customerId+"'";
+					sql="select max(order_id) from orders where customer_id="+"'"+customerId+"'";
 					rs=stmt.executeQuery(sql);
 					while(rs.next())
 					{
 						 orderno=rs.getString(1);
 					}
-					
-					sql="insert into order_detail_new (order_id,isbn,quantity) select order_id,isbn,quantity from cart inner join orders_new on orders_new.customer_id=cart.customer_id where order_id="+Integer.parseInt(orderno);
+					logger.info("order : {}", orderno);
+					logger.info("orderParse : {}",Integer.parseInt(orderno));
+					sql="insert into order_detail (order_id,bookId,quantity) select order_id,bookId,quantity from cart inner join orders on orders.customer_id=cart.customer_id where order_id="+Integer.parseInt(orderno);
 					statement.executeUpdate(sql);
 					sql="delete from cart where customer_id='"+customerId+"'";
 					statement.executeUpdate(sql);
 				} catch (Exception e) {
-					logger.error("Error Occured While Establishing The Connection : " + e);
+					logger.error("Error Occured While Establishing The Connection : " + e.getCause());
 				}
 				return Integer.parseInt(orderno);
 				

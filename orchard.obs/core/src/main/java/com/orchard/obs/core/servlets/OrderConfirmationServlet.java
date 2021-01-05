@@ -77,7 +77,7 @@ import com.orchard.obs.core.services.serviceImpl.OrderConfirmationService;
 		try {
 			LOG.info("inside try");
 			//PlaceOrderService orderService=new PlaceOrderService();
-			Customer customer=orderService.getCustomer("bookworm", "ABC");
+			Customer customer=orderService.getCustomer("bookworm", request.getParameter("customer_id"));
 			String json = new Gson().toJson(customer);
 			response.getWriter().print(json);
 		}
