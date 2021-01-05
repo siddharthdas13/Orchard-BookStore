@@ -60,7 +60,7 @@ public class PlaceOrderDao {
 						 orderno=rs.getString(1);
 					}
 					
-					sql="insert into order_detail_new (order_id,isbn,quantity) select order_id,isbn,quantity from cart inner join orders_new on orders_new.customer_id=cart.customer_id where order_id="+Integer.parseInt(orderno);
+					sql="insert into order_detail_new (order_id,bookId,quantity) select order_id,bookId,quantity from cart inner join orders_new on orders_new.customer_id=cart.customer_id where order_id="+Integer.parseInt(orderno);
 					statement.executeUpdate(sql);
 					sql="delete from cart where customer_id='"+customerId+"'";
 					statement.executeUpdate(sql);
