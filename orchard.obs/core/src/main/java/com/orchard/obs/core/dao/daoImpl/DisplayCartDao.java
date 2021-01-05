@@ -38,7 +38,7 @@ public class DisplayCartDao {
 					connection = dataSource.getConnection();
 					logger.info("Working : {}", connection);
 					statement = connection.createStatement();
-					resultSet = statement.executeQuery("Select * FROM cart INNER JOIN book on (book.bookId=cart.bookId) where customer_id="+"'"+customerId+"'");
+					resultSet = statement.executeQuery("Select * FROM cart INNER JOIN book on (book.isbn=cart.ISBN) where customer_id="+"'"+customerId+"'");
 					
 					while (resultSet.next()) {
 						//For each employee record-- create an Employee instance
