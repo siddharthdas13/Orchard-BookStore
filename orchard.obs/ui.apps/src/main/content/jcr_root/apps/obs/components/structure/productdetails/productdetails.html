@@ -1,6 +1,290 @@
+<<<<<<< HEAD
+<style>
+#message-block {
+	display: none;
+	background-color: red;
+   	padding: 1%;
+    text-align: center;
+    margin-bottom: 1%;
+    border-radius: 5px;
+}
+
+#message {
+	color: white;
+    font-size: 18px;
+}
+
+#close {
+	float: right;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: default;
+}
+=======
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"></sly>
 <sly data-sly-call="${clientlib.all @ categories='obs.base'}"></sly>
+>>>>>>> branch 'master' of https://github.com/KirtiPandey512/Orchard-BookStore.git
 
+<<<<<<< HEAD
+#product-desc {
+    display: flex;
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 1px solid lightgrey;
+    line-height: 1.8;
+}
+
+#product-desc-left {
+    flex: 0 1 40%;
+    padding: 1.5%;
+}
+
+#image-block {
+    border: 1px solid lightgrey;
+    padding: 3%;
+}
+
+#image-block img {
+    width: 60%;     
+}
+
+#buttons-block {
+    display: flex;    
+}
+
+#buttons-block button {
+    flex: 0 1 50%;
+    background-color: #6B8E23;
+    border: 2px solid white;
+    border-radius: 4px;
+    color: white;
+    width: 125px;
+    height: 50px;
+    margin: 0.75%;
+}
+
+#product-desc-right {
+    flex: 0 1 60%;
+    padding: 1.5%;
+}
+
+#product-desc-right .product-name {
+    font-weight: 700;
+}
+
+#product-desc-right .product-language {
+    color: grey;
+}
+
+#product-desc-right .product-price {
+    display: flex;
+}
+
+.product-price .discount-price {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.product-price .actual-price {
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+    margin-top: 0.1%;
+    color: gray;
+}
+
+.product-price .discount {
+    margin-top: 0.2%;
+    font-size: 16px;
+    color: #388e3c;
+}
+
+.label-value {
+    display: flex;
+    margin-top: 3%;
+}
+
+.label {
+    flex: 0 0 15%;
+}
+
+.value {
+	flex-grow: 1;
+}
+
+.value ul {
+    margin: 0;
+    padding: 0;
+    padding-left: 6%;
+}
+
+#description-value {
+	text-align: justify;
+}
+</style>
+
+
+<script>
+$(function() {
+	const params = new URLSearchParams(window.location.search);
+	bookId = params.get('bookId');
+
+	if(bookId != null) {
+
+		var customerId = null;
+		var name = "customerId" + "=";
+    	var ca = document.cookie.split(';');
+
+  		for(var i = 0; i < ca.length; i++) {
+    		var c = ca[i];
+    		while (c.charAt(0) == ' ') {
+      			c = c.substring(1);
+    		}
+    		if (c.indexOf(name) == 0) {
+      			customerId = c.substring(name.length, c.length);
+    		}
+  		}
+
+		$.ajax({
+			url: '/bin/obs/bookservlet',
+			type: 'POST',
+        	data: {
+        		bookId: bookId,
+				customerId: customerId,
+            	action: "getbookdata"
+        	},
+			complete: function(xhr, status) {
+        		if (status == "success" && xhr.responseText.trim() != "null") {
+            		bookData = JSON.parse(xhr.responseText);
+                    $("#book-image").attr("src", "/content/dam/obs/en/images/books/" + bookData.name + ".jpg");
+                	$(".product-name").text(bookData.name);
+                	$(".product-language").text(bookData.language);
+                	$(".actual-price").html("<s>₹" + bookData.price + "</s>");
+                	$(".discount").text(bookData.discount + "% Off");
+                	$(".discount-price").text("₹" + ((100-bookData.discount)/100)*bookData.price);
+                	$("#author-value").text(bookData.author);
+                	$("#language").text("Language : " + bookData.language);
+                	$("#publisher").text("Publisher : " + bookData.publisher);
+                	$("#genre").text("Genre : " + bookData.genre);
+                	$("#isbn").text("ISBN : " + bookData.isbn);
+					$("#pages").text("Pages : " + bookData.pageCount);
+                	$("#description-value").text(bookData.description);
+
+                    if(bookData.isPresentInCart) {
+                    	$("#add-to-cart").text("GO TO CART");
+                    }
+           		}
+            	else {
+            		alert("Error");
+
+            	}
+			}
+		});
+
+    	$("#add-to-cart").click(function() {
+        	if(customerId != null) {
+            	if($("#add-to-cart").text() == "ADD TO CART") {
+					$.ajax({
+						url: '/bin/obs/bookservlet',
+						type: 'POST',
+						data: {
+							bookId: bookData.id,
+                			customerId: customerId,
+                			action: "addtocart"
+						},
+		 				complete: function(xhr, status) {
+            				if (status == "success") {
+                				if(xhr.responseText > 0) {
+                                	$("#message-block").show();
+                					$("#message-block").css("background-color", "green");
+            						$("#message").text("Successfully Added To Cart");
+                                    $("#add-to-cart").text("GO TO CART");
+                   				}
+               				}
+                			else {
+                            	$("#message-block").show();
+                				$("#message-block").css("background-color", "red");
+            					$("#message").text("Failed To Add Book To Cart");
+                			}
+		 				}
+					});
+                }
+                else {
+					window.location = "cart.html";
+                }
+            }
+            else {
+            	$("#message-block").show();
+                $("#message-block").css("background-color", "red");
+            	$("#message").text("Please Login To Add Book To Cart!...");
+            }
+		});
+
+		/* $("#add-to-cart").click(function() {
+        	if(customerId != null) {
+            	if($("#add-to-cart").text() == "ADD TO CART") {
+					$.ajax({
+						url: '/bin/obs/bookservlet',
+						type: 'POST',
+						data: {
+							bookId: bookData.id,
+                			customerId: customerId,
+                			action: "addtocart"
+						},
+		 				complete: function(xhr, status) {
+            				if (status == "success") {
+                				if(xhr.responseText > 0) {
+                                	$("#message-block").show();
+                					$("#message-block").css("background-color", "green");
+            						$("#message").text("Successfully Added To Cart");
+                                    $("#add-to-cart").text("GO TO CART");
+                   				}
+               				}
+                			else {
+                            	$("#message-block").show();
+                				$("#message-block").css("background-color", "red");
+            					$("#message").text("Failed To Add Book To Cart");
+                			}
+		 				}
+					});
+                }
+                else {
+					window.location = "cart.html";
+                }
+            }
+            else {
+            	$("#message-block").show();
+                $("#message-block").css("background-color", "red");
+            	$("#message").text("Please Login To Add Book To Cart!...");
+            }
+		}); */
+
+    	$("#buy-now").click(function() {
+        	if(customerId != null) {
+				alert("Buy Now");
+            }
+            else {
+                $("#message-block").show();
+                $("#message-block").css("background-color", "red");
+            	$("#message").text("Please Login To Buy Book!...");
+            }
+		});
+
+        $("#message-block").click(function() {
+        	$(this).hide();
+        });
+	}
+    else {
+    	$("#message-block").show();
+        $("#close").hide();
+        $("#product-desc").hide();
+    	$("#message").text("No Page Found...");
+    }
+});
+</script>
+
+=======
+>>>>>>> branch 'master' of https://github.com/KirtiPandey512/Orchard-BookStore.git
 <div id="message-block">
 	<span id="message"></span>
 	<span id="close">&times;</span>

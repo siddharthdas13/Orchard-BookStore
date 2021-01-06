@@ -9,8 +9,10 @@
 }
 .cmp-breadcrumb__item{
 	display:inline-block;
-	font-size:20px;
 }
+.cmp-breadcrumb__item:last-of-type{
+    color:#77ab13;
+        }
 .cmp-breadcrumb__item:not(:last-of-type)::after{
 	content:">";
 	margin:0px 5px;
@@ -19,6 +21,8 @@
 .cmp-breadcrumb__item-link{
 	text-decoration:none;
 	color:Black;
+    font-weight: bold;
+
 }
 .cmp-breadcrumb__item-link:hover{
 	text-decoration:underline;
