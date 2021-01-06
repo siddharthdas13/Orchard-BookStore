@@ -14,6 +14,7 @@ public class Book {
 	private Long isbn[];
 	private String id, name, author[], genre, language, publisher, edition, description;
 	private Date publishDate;
+	private boolean isPresentInCart;
 	
 	public Book() {
 		super();
@@ -21,7 +22,7 @@ public class Book {
 
 	public Book(int price, int quantity, int discount, int pageCount, Long[] isbn, String id, String name,
 			String[] author, String genre, String language, String publisher, String edition, String description,
-			Date publishDate) {
+			Date publishDate, boolean isPresentInCart) {
 		super();
 		this.price = price;
 		this.quantity = quantity;
@@ -37,6 +38,7 @@ public class Book {
 		this.edition = edition;
 		this.description = description;
 		this.publishDate = publishDate;
+		this.isPresentInCart = isPresentInCart;
 	}
 
 	public int getPrice() {
@@ -149,6 +151,14 @@ public class Book {
 
 	public void setPublishDate(Date publishDate) {
 		this.publishDate = publishDate;
+	}
+
+	public boolean isPresentInCart() {
+		return isPresentInCart;
+	}
+
+	public void setPresentInCart(boolean isPresentInCart) {
+		this.isPresentInCart = isPresentInCart;
 	}
 	
 }

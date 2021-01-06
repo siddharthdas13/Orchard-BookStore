@@ -39,7 +39,7 @@ protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse r
 try {
 	LOG.info("inside try");
 	//PlaceOrderService orderService=new PlaceOrderService();
-	List<MyProducts> products=orderService.getProducts("bookworm", "ABC");
+	List<MyProducts> products=orderService.getProducts("bookworm", request.getParameter("customer_id"));
 	String json = new Gson().toJson(products);
 	LOG.info("json {} :" ,json);
 	response.getWriter().print(json);

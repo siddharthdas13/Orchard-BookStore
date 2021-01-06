@@ -31,7 +31,7 @@ public class BookDaoImpl implements BookDao {
 	DBUtil dbUtil;
 	
 	@Override
-	public Book getBookDetails(String dataSourceName, String bookId) throws BookDaoException {
+	public Book getBookDetails(String dataSourceName, String bookId, String customerId) throws BookDaoException {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -70,6 +70,10 @@ public class BookDaoImpl implements BookDao {
 					isbns.add(resultSet.getLong(1));
 				}
 				book.setIsbn(isbns.toArray(new Long[isbns.size()]));
+				
+				resultSet = statement.executeQuery("SELECT * FROM CART WHERE BOOKID = '" + bookId + "' AND CUSTOMER_ID = '" + customerId + "';");
+				if (resultSet.next())
+					book.setPresentInCart(true);
 			} 	
 			return book;
 		} catch (DataSourceNotFoundException | SQLException e) {

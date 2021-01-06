@@ -131,7 +131,7 @@ public class CartDaoImpl implements CartDao {
 		try {
 			connection = dbUtil.getConnection(dataSourceName);
 			preparedStatement = connection.prepareStatement("INSERT INTO WISHLIST VALUES(?, ?, ?);");
-			preparedStatement.setString(1, "");
+			preparedStatement.setString(1, customerId + bookId);
 			preparedStatement.setString(2, bookId);
 			preparedStatement.setString(3, customerId);
 			return preparedStatement.executeUpdate();				

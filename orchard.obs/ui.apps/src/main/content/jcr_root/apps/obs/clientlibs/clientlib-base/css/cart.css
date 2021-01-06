@@ -1,54 +1,15 @@
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; 
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  padding-top: 100px;
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  padding: 40px;
-  width: 50%;
-  height: 250px;
-  overflow: auto; 
-  border-radius: 10px;
-  margin: auto;
-}
-
-/* The Close Button */
-.close {
-  position: fixed;
-  color: #aaaaaa;
-  font-size: 28px;
-  font-weight: bold;
-  margin-left: 760px;
-  margin-top: -35px;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}    
-
 #cart-block {
-   display: flex;
+	display: flex;
+    width: 80%;
+    margin: auto;
 }
 
 #cart-block-first-block {
+    flex: 0 1 60%;
 }
 
 #cart-block-second-block {
+    flex: 0 1 40%;
     margin-left: 0.75%;
 }
 
@@ -84,7 +45,7 @@
     line-height: 1.8;
 }
 
-.item-detail-block .name {
+.item-detail-block .item-name {
     font-weight: 700;
 }
 
@@ -92,23 +53,23 @@
     color: grey;
 }
 
-.item-detail-block .price {
+.item-detail-block .item-price {
     display: flex;
 }
 
-.price .discount-price {
+.item-price .discount-price {
     font-size: 18px;
     font-weight: bold;
 }
 
-.price .actual-price {
+.item-price .actual-price {
     margin-left: 1.5%;
     margin-right: 1.5%;
     margin-top: 1%;
     color: gray;
 }
 
-.price .discount {
+.item-price .discount {
     margin-top: 0.2%;
     font-size: 16px;
     color: #388e3c;

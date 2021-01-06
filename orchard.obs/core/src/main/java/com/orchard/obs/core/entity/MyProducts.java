@@ -9,6 +9,7 @@ public class MyProducts {
 	private String author;
 	private String language;
 	private String publisher;
+	private String edition;
 	public MyProducts() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -68,6 +69,12 @@ public class MyProducts {
 	}
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
+	}
+	public String getEdition() {
+		return edition;
+	}
+	public void setEdition(String edition) {
+		this.edition = edition;
 	}
 	
 }

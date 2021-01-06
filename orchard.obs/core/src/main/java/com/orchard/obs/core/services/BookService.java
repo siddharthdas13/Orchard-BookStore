@@ -12,7 +12,7 @@ import com.orchard.obs.core.entity.Book;
  */
 public interface BookService {
 
-	public Book getBookDetails(String dataSourceName, String bookId) throws BookServiceException;
+	public Book getBookDetails(String dataSourceName, String bookId, String customerId) throws BookServiceException;
 
 	public int addBookToCart(String dataSourceName, String bookId, String customerId) throws BookServiceException;
 

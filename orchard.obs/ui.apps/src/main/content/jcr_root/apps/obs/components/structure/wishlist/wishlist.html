@@ -1,13 +1,17 @@
-<!--sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"></sly>
-<sly data-sly-call="${clientlib.all @ categories='obs.base'}"></sly-->
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"></sly>
+<sly data-sly-call="${clientlib.all @ categories='obs.base'}"></sly>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<<<<<<< HEAD
 <script>
 	$(function() {
 		var customerId = null;
 		var name = "customerId" + "=";
     	var ca = document.cookie.split(';');
+=======
+>>>>>>> branch 'master' of https://github.com/KirtiPandey512/Orchard-BookStore.git
 
+<<<<<<< HEAD
   		for(var i = 0; i < ca.length; i++) {
     		var c = ca[i];
     		while (c.charAt(0) == ' ') {
@@ -181,7 +185,13 @@
 	<span id="close">&times;</span>
 </div>
 <div id="cart-block">
+=======
+<div id="message-block">
+	<span id="message"></span>
+	<span id="close">&times;</span>
+>>>>>>> branch 'master' of https://github.com/KirtiPandey512/Orchard-BookStore.git
 </div>
+<<<<<<< HEAD
 
 <style>
 #message-block {
@@ -302,3 +312,6 @@
     color: #388e3c;
 }
 </style>
+=======
+<div id="cart-block"></div>
+>>>>>>> branch 'master' of https://github.com/KirtiPandey512/Orchard-BookStore.git

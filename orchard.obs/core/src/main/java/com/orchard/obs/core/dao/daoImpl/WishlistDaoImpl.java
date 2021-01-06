@@ -35,12 +35,15 @@ public class WishlistDaoImpl implements WishlistDao {
 	public List<Cart> getWishlistDetails(String dataSourceName, String customerId) throws WishlistDaoException {
 		Connection connection = null;
 		Statement statement = null;
+		Statement statement1 = null;
 		ResultSet resultSet = null;
+		ResultSet resultSet1 = null;
 		List<Cart> wishlistItems = new ArrayList<Cart>();
 
 		try {
 			connection = dbUtil.getConnection(dataSourceName);
 			statement = connection.createStatement();
+			statement1 = connection.createStatement();
 			resultSet = statement.executeQuery("SELECT B.BOOKID, B.NAME, P.PUBLISHERNAME, B.PAGECOUNT, B.EDITION, B.LANGUAGE, B.QUANTITY, B.PRICE, B.DISCOUNT, G.GENRENAME FROM WishList W JOIN BOOK B ON W.BOOKID = B.BOOKID INNER JOIN PUBLISHER P ON P.PUBLISHERID = B.PUBLISHERID INNER JOIN GENRE G ON G.GENREID = B.GENREID AND W.CUSTOMER_ID = '" + customerId + "';");
 
 			while (resultSet.next()) {
@@ -59,6 +62,9 @@ public class WishlistDaoImpl implements WishlistDao {
 				book.setPrice(resultSet.getInt(8));
 				book.setDiscount(resultSet.getInt(9));
 				book.setGenre(resultSet.getString(10));
+				resultSet1 = statement1.executeQuery("SELECT * FROM CART WHERE BOOKID = '" + book.getId() + "' AND CUSTOMER_ID = '" + customerId + "';");
+				if (resultSet1.next())
+					book.setPresentInCart(true);
 				
 				cart.setBook(book);
 				cart.setCartQuantity(1);
@@ -69,11 +75,9 @@ public class WishlistDaoImpl implements WishlistDao {
 		} catch (DataSourceNotFoundException | SQLException e) {
 			throw new WishlistDaoException(e);
 		}
-
 		finally {
-			dbUtil.closeResource(resultSet);
-			dbUtil.closeResource(statement);
-			dbUtil.closeResource(connection);
+//			dbUtil.closeResource(statement);
+//			dbUtil.closeResource(connection);
 		}
 		return wishlistItems;
 	}
