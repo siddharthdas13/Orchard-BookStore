@@ -168,11 +168,8 @@ $.fn.loadCartData = function(cartData, customerId) {
 
 		var Place_Order_Block = [
             '<div class="place-order-block">',
-<<<<<<< HEAD
-                '<button onclick="$(this).placeOrder();">PLACE ORDER</button>',
-=======
                 '<button onclick="$(this).placeOrder(\'' + customerId + '\');">PLACE ORDER</button>',
->>>>>>> branch 'master' of https://github.com/KirtiPandey512/Orchard-BookStore.git
+
             '</div>'
         ].join("\n");
 		$("#cart-block-first-block").append(Place_Order_Block);
