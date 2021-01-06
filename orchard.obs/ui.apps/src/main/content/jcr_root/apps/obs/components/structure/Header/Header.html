@@ -39,8 +39,7 @@ data-sly-call="${clientlib.all @ categories='obs.base'}"/>
 
 <script>
 $(function() {
-	var customerId = -1;
-    var status = 0;
+	var customerId = null;
 	var name = "customerId" + "=";
     var ca = document.cookie.split(';');
 
@@ -51,7 +50,6 @@ $(function() {
     	}
     	if (c.indexOf(name) == 0) {
       		customerId = c.substring(name.length, c.length);
-            status = 1;
     	}
   	}
 
@@ -65,14 +63,14 @@ $(function() {
     }
 
 	$.fn.cart = function() {
-    	if(customerId == -1) {
+    	if(customerId == null) {
         	alert("Please Login!..");
         }
         else
         	$(this).fetchCartData(customerId);
     }
 
-	if(status == 1) {
+	if(customerId != null) {
 		$("#login-btn").css("display", "none");
 		$("#logout-btn").css("display", "inline-block");
     }

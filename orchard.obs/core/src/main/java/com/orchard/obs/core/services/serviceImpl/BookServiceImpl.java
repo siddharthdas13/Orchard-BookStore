@@ -23,9 +23,9 @@ public class BookServiceImpl implements BookService {
 	BookDao bookDao;
 	
 	@Override
-	public Book getBookDetails(String dataSourceName, String bookId) throws BookServiceException {
+	public Book getBookDetails(String dataSourceName, String bookId, String customerId) throws BookServiceException {
 		try {
-			return bookDao.getBookDetails(dataSourceName, bookId);
+			return bookDao.getBookDetails(dataSourceName, bookId, customerId);
 		} catch (BookDaoException e) {
 			throw new BookServiceException(e.getCause());
 		}

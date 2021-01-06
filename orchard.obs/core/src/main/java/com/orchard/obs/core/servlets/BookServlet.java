@@ -48,14 +48,15 @@ public class BookServlet extends SlingAllMethodsServlet {
 		
 		try {
 			if (action.equals("getbookdata")) {
-				response.getWriter().println(new Gson().toJson(bookService.getBookDetails("bookworm", bookId)));
+				String customerId = request.getParameter("customerId");
+				response.getWriter().println(new Gson().toJson(bookService.getBookDetails("bookworm", bookId, customerId)));
 			}
 			else if (action.equals("addtocart")) {
 				String customerId = request.getParameter("customerId");
 				response.getWriter().println(new Gson().toJson(bookService.addBookToCart("bookworm", bookId, customerId)));
 			}
 			else if (action.equals("buynow")) {
-				response.getWriter().println(new Gson().toJson(bookService.getBookDetails("bookworm", bookId)));
+				response.getWriter().println("Buy Now");
 			}
 		} catch (BookServiceException e) {
 			logger.info(e.getMessage());

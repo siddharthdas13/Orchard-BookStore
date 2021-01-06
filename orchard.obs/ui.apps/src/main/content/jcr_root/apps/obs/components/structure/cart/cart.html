@@ -135,14 +135,14 @@ $(function() {
             	book = item.book;
 				discountPrice = (((100-book.discount)/100)*book.price*item.cartQuantity);
                 actualPrice = (book.price*item.cartQuantity);
-               	totalPrice += discountPrice;
+               	totalPrice += actualPrice;
                 totalDiscount += (book.discount*book.price*item.cartQuantity/100);
 
 				var Item_Block = [
 						'<div class="item-block">',
                         	'<div class="item-block-first-div">',
                             	'<div class="item-image-block">',
-                                	'<img src="/content/dam/aemContentFolder/english/' + book.name + '.jpg">',
+                                	'<img src="/content/dam/obs/en/images/books/' + book.name + '.jpg">',
                             	'</div>',
                             	'<div class="item-detail-block">',
                                 	'<div class="item-name">' + book.name + '</div>',
@@ -188,7 +188,7 @@ $(function() {
 
 			var Place_Order_Block = [
             	'<div class="place-order-block">',
-                	'<button>PLACE ORDER</button>',
+                	'<button onclick="$(this).placeOrder();">PLACE ORDER</button>',
                 '</div>'
             ].join("\n");
 			$("#cart-block-first-block").append(Place_Order_Block);
@@ -243,6 +243,10 @@ $(function() {
 		}
     	else
     		$("#cart-block").html("<h3>Cart Is Empty!...</h3>");
+	}
+
+    $.fn.placeOrder = function() {
+    	window.location = "order.html";
 	}
 </script>
 

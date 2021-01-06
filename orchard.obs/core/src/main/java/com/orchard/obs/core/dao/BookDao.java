@@ -12,7 +12,7 @@ import com.orchard.obs.core.entity.Book;
  */
 public interface BookDao {
 	
-	public Book getBookDetails(String dataSourceName, String bookId) throws BookDaoException;
+	public Book getBookDetails(String dataSourceName, String bookId, String customerId) throws BookDaoException;
 
 	public int addBookToCart(String dataSourceName, String bookId, String customerId) throws BookDaoException;
 }
