@@ -47,6 +47,28 @@ $.fn.updateCartData = function(index, quantity, customerId) {
 	});
 }
 
+$.fn.addToWishlist = function(index, customerId) {
+	$.ajax({
+		url: '/bin/obs/cartservlet',
+		type: 'POST',
+		data: {
+			bookId: (cartData[index].book).id,
+            customerId: customerId,
+            action: "addtowishlist"
+		},
+		complete: function(xhr, status) {
+        	if (status == "success") {
+            	if(xhr.responseText > 0) {
+                	alert("Successfully Saved To Wishlist");
+                }
+           	}
+            else {
+            	alert("Error");
+            }
+		}
+	});
+}
+
 $.fn.removeCartItem = function(index, customerId) {
 	$.ajax({
 		url: '/bin/obs/cartservlet',
@@ -93,14 +115,14 @@ $.fn.loadCartData = function(cartData, customerId) {
         	book = item.book;
 			discountPrice = (((100-book.discount)/100)*book.price*item.cartQuantity);
             actualPrice = (book.price*item.cartQuantity);
-            totalPrice += discountPrice;
+            totalPrice += actualPrice;
             totalDiscount += (book.discount*book.price*item.cartQuantity/100);
 
 			var Item_Block = [
 				'<div class="item-block">',
                 	'<div class="item-block-first-div">',
                     	'<div class="item-image-block">',
-                        	'<img src="/content/dam/aemContentFolder/english/' + book.name + '.jpg">',
+                        	'<img src="/content/dam/obs/en/images/books/' + book.name + '.jpg">',
                         '</div>',
                         '<div class="item-detail-block">',
                         	'<div class="item-name">' + book.name + '</div>',
@@ -123,7 +145,7 @@ $.fn.loadCartData = function(cartData, customerId) {
                             '<button class="plus" id="p' + index + '" onclick="$(this).updateCartData(' + index + ',' + (item.cartQuantity+1) + ',\'' + customerId + '\');"> + </button>',
                         '</div>',
                         '<div class="item-save-remove">',
-                        	'<div class="item-save-later">SAVE FOR LATER</div>',
+                        	'<div class="item-save-later" onclick="$(this).addToWishlist(' + index + ',\'' + customerId + '\')">ADD TO WISHLIST</div>',
                             '<div class="item-remove" onclick="$(this).removeCartItem(' + index + ',\'' + customerId + '\')">REMOVE</div>',
                         '</div>',
                     '</div>',
@@ -146,7 +168,7 @@ $.fn.loadCartData = function(cartData, customerId) {
 
 		var Place_Order_Block = [
             '<div class="place-order-block">',
-                '<button>PLACE ORDER</button>',
+                '<button onclick="$(this).placeOrder();">PLACE ORDER</button>',
             '</div>'
         ].join("\n");
 		$("#cart-block-first-block").append(Place_Order_Block);
@@ -201,23 +223,26 @@ $.fn.loadCartData = function(cartData, customerId) {
     	alert("Cart Is Empty!...");
 }
 
-$(".modal").click(function() {
-	/* $("#myModal").hide(); */
-    alert("hiuyhb");
-});
+$.fn.close = function() {
+    $("#myModal").hide();
+}
 
 $(window).click(function(e) {
     if(e.target.id == "myModal") {
     	$("#myModal").hide();
     }
 });
+
+$.fn.placeOrder = function() {
+    window.location = "order.html";
+}
 </script>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
 	<!-- Modal content -->
     <div class="modal-content">
-    	<span class="close">&times;</span>
+    	<span class="close" onclick="$(this).close();">&times;</span>
     </div>
 </div>
 

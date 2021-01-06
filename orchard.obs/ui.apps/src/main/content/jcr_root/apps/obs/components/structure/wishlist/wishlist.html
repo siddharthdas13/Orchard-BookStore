@@ -4,8 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function() {
-		var customerId = -1;
-    	var status = 0;
+		var customerId = null;
 		var name = "customerId" + "=";
     	var ca = document.cookie.split(';');
 
@@ -16,17 +15,17 @@
     		}
     		if (c.indexOf(name) == 0) {
       			customerId = c.substring(name.length, c.length);
-            	status = 1;
     		}
   		}
 
-    	if(status == 1) {
+    	if(customerId != null) {
     		$(this).fetchWishlistData(customerId);
     	}
     	else {
-    		$("#cart-block").css("width", "auto");
-    		$("#cart-block").css("margin-left", "50%");
-    		$("#cart-block").html("<h3>Please Login!...</h3>");
+        	$("#message-block").show();
+            $("#close").hide();
+            $("#message-block").css("background-color", "red");
+           	$("#message").text("Please Login!...");
     	}
 	});
 
@@ -44,32 +43,45 @@
                     $(this).loadWishlistData(wishlistData, customerId);
                 }
                 else {
-                	alert("Error");
-                }
+                	$("#message-block").show();
+                	$("#message-block").css("background-color", "red");
+            		$("#message").text("something went wrong");
+               	}
 		 	}
 	  	});
 	}
 
 	$.fn.addToCart = function(index, customerId) {
-		$.ajax({
-			url: '/bin/obs/wishlistservlet',
-			type: 'POST',
-			data: {
-				bookId: (wishlistData[index].book).id,
-                customerId: customerId,
-                action: "addtocart"
-			},
-		 	complete: function(xhr, status) {
-            	if (status == "success") {
-                	if(xhr.responseText > 0) {
-                      	alert("Successfully Added To Cart");
-                   	}
-               	}
-                else {
-                	alert("Error");
-                }
-		 	}
-		});
+    	var obj = this;
+    	if($(this).text() == "ADD TO CART") {
+			$.ajax({
+				url: '/bin/obs/wishlistservlet',
+				type: 'POST',
+				data: {
+					bookId: (wishlistData[index].book).id,
+                	customerId: customerId,
+                	action: "addtocart"
+				},
+		 		complete: function(xhr, status) {
+            		if (status == "success") {
+                		if(xhr.responseText > 0) {
+                        	$("#message-block").show();
+                			$("#message-block").css("background-color", "green");
+            				$("#message").text("Successfully Added To Cart");
+                            $(obj).text("GO TO CART");
+                   		}
+               		}
+                	else {
+                    	$("#message-block").show();
+                		$("#message-block").css("background-color", "red");
+            			$("#message").text("Failed To Add Book To Cart");
+                	}
+		 		}
+			});
+        }
+        else {
+			window.location = "cart.html";
+        }
     }
 
 	$.fn.removeWishlistItem = function(index, customerId) {
@@ -89,7 +101,9 @@
                    	}
                	}
                 else {
-                	alert("Error");
+                	$("#message-block").show();
+                	$("#message-block").css("background-color", "red");
+            		$("#message").text("Failed To Remove Book From Wishlist");
                 }
 		 	}
 		});
@@ -116,7 +130,7 @@
 					'<div class="item-block">',
                     	'<div class="item-block-first-div">',
                         	'<div class="item-image-block">',
-                            	'<img src="/content/dam/aemContentFolder/english/' + book.name + '.jpg">',
+                            	'<img src="/content/dam/obs/en/images/books/' + book.name + '.jpg">',
                             '</div>',
                             '<div class="item-detail-block">',
                                 '<div class="item-name">' + book.name + '</div>',
@@ -151,6 +165,10 @@
                 	$(".discount").hide();
                     $(".actual-price").hide();
                 }
+
+                if(book.isPresentInCart) {
+                	$(".item-save-later").text("GO TO CART");
+                }
 			});
 		}
 		else
@@ -158,10 +176,36 @@
 	}
 </script>
 
+<div id="message-block">
+	<span id="message"></span>
+	<span id="close">&times;</span>
+</div>
 <div id="cart-block">
 </div>
 
 <style>
+#message-block {
+	display: none;
+	background-color: red;
+   	padding: 1%;
+    text-align: center;
+    margin-bottom: 1%;
+    border-radius: 5px;
+}
+
+#message {
+	color: white;
+    font-size: 18px;
+}
+
+#close {
+	float: right;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: default;
+}
+
 #cart-block {
 	width: 80%;
     margin: auto;

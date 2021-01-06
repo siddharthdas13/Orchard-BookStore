@@ -28,10 +28,37 @@ public class FooterModel {
 	String info;
 	
 	@Inject
+	String about;
+	
+	@Inject
+	String aboutLink;
+	
+	@Inject
+	String contact;
+	
+	@Inject
+	String contactLink;
+	
+	@Inject
+	String faq;
+	
+	@Inject
+	String faqLink;
+	
+	@Inject
+	String terms;
+	
+	@Inject
+	String termsLink;
+	
+	@Inject
 	String contacts;
 	
 	@Inject
-	String contactContent;
+	String mail;
+	
+	@Inject
+	String phone;
 
 	public String getAboutUs() {
 		return aboutUs;
@@ -49,6 +76,38 @@ public class FooterModel {
 		return info;
 	}
 
+	public String getAbout() {
+		return about;
+	}
+
+	public String getAboutLink() {
+		return aboutLink;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public String getContactLink() {
+		return contactLink;
+	}
+
+	public String getFaq() {
+		return faq;
+	}
+
+	public String getFaqLink() {
+		return faqLink;
+	}
+
+	public String getTerms() {
+		return terms;
+	}
+
+	public String getTermsLink() {
+		return termsLink;
+	}
+
 	public String getContacts() {
 		return contacts;
 	}
@@ -61,7 +120,13 @@ public class FooterModel {
 		return shopContent;
 	}
 
-	public String getContactContent() {
-		return contactContent;
+	public String getMail() {
+		return mail;
 	}
+
+	public String getPhone() {
+		return phone;
+	}
+	
+	
 }

@@ -17,12 +17,12 @@
           <!-- END BOTTOM ABOUT BLOCK -->
           <!-- BEGIN BOTTOM INFO BLOCK -->
           <div class="col-sm-6" style="margin-right: -20%">
-            <h2>Information</h2>
+            <h2>${footer.info}</h2>
             <ul class="list-unstyled">
-				<li><i class="fa fa-angle-right"></i> <a href="#">About</a></li>
-				<li><i class="fa fa-angle-right"></i> <a href="#">Contact Us</a></li>
-				<li><i class="fa fa-angle-right"></i> <a href="#">Frequently Asked Questions</a></li>
-				<li><i class="fa fa-angle-right"></i> <a href="#">Terms and Conditions</a></li>
+                <li><i class="fa fa-angle-right"></i> <a href="${footer.aboutLink}.html">About Us</a></li>
+				<li><i class="fa fa-angle-right"></i> <a href="${footer.contactLink}.html">Contact Us</a></li>
+				<li><i class="fa fa-angle-right"></i> <a href="${footer.faqLink}.html">Frequently Asked Questions</a></li>
+				<li><i class="fa fa-angle-right"></i> <a href="${footer.termsLink}.html">Terms and Conditions</a></li>
             </ul>
           </div>
           <!-- END INFO BLOCK -->
@@ -49,14 +49,11 @@
             
           <!-- BEGIN BOTTOM CONTACTS -->
           <div class="col-sm-3" align="right">
-            <h2>Our Contacts</h2>
+            <h2>${footer.contacts}</h2>
             <address class="margin-bottom-40">
 				<h4>BookStore.com</h4>	
-              #1218,<br>
-			  Sector-15, Sonepat,<br>
-			  Haryana -131001<br>
-              <abbr title="Phone">P:</abbr>+91-9050111218<br>
-              Email: <a href="mailto:info@bookchor.com">cs@bookchor.com</a><br>
+              Phone:${footer.phone}<br>
+              Email: <a href=#">${footer.mail}</a><br>
             </address>
           </div>
           <!-- END BOTTOM CONTACTS -->
