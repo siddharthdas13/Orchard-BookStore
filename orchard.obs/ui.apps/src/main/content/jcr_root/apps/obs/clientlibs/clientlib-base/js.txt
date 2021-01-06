@@ -1,12 +1,9 @@
 #base=js
 
 sideNavigation.js
-<<<<<<< HEAD
-register.js
-=======
 register.js
 productdetails.js
 wishlist.js
 cart.js
 login.js
->>>>>>> branch 'master' of https://github.com/KirtiPandey512/Orchard-BookStore.git
+
