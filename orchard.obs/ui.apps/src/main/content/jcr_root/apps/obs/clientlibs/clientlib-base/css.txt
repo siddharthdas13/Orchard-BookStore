@@ -8,3 +8,6 @@ product_tile.css
 Login.css
 sideNavigation.css
 banner.css
+productdetails.css
+wishlist.css
+cart.css

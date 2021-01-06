@@ -1,0 +1,117 @@
+#message-block {
+	display: none;
+	background-color: red;
+   	padding: 1%;
+    text-align: center;
+    margin-bottom: 1%;
+    border-radius: 5px;
+}
+
+#message {
+	color: white;
+    font-size: 18px;
+}
+
+#close {
+	float: right;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: default;
+}
+
+#cart-block {
+	width: 80%;
+    margin: auto;
+}
+
+#header, .item-block {            
+    box-shadow: 0 0 1px 1px lightgrey;
+    padding: 1%;
+    margin-top: 0.75%;
+}
+
+.item-block-first-div {
+    display: flex;
+    width: 100%;
+}
+
+.item-image-block {
+    flex: 0 1 20%;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+    display: flex;
+    justify-content: center;
+}
+
+.item-image-block img {
+    width: 60%;
+    height: 100%;
+}
+
+.item-detail-block {
+    position: relative;
+    flex: 0 1 50%;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+    line-height: 1.8;
+}
+
+.item-detail-block .item-name {
+    font-weight: 700;
+}
+
+.item-detail-block .language {
+    color: grey;
+}
+
+.item-detail-block .item-price {
+    display: flex;
+}
+
+.item-price .discount-price {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.item-price .actual-price {
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+    margin-top: 1%;
+    color: gray;
+}
+
+.item-price .discount {
+    margin-top: 0.2%;
+    font-size: 16px;
+    color: #388e3c;
+}
+
+.delivery-detail-block {
+    position: relative;
+    flex: 0 1 30%;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+    line-height: 1.8;
+}
+
+.delivery-detail-block .replacement-policy {
+    font-size: 14px;
+    color: gray;
+}
+
+.item-save-remove {
+    flex: 0 1 80%;
+}
+
+.item-save-later, .item-remove {
+    margin: 1.5%;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 0px;
+}
+
+.item-save-later:hover, .item-remove:hover {
+    color: #388e3c;
+}

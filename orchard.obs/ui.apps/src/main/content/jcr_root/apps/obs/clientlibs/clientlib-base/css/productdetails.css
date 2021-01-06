@@ -1,0 +1,116 @@
+#message-block {
+	display: none;
+	background-color: red;
+   	padding: 1%;
+    text-align: center;
+    margin-bottom: 1%;
+    border-radius: 5px;
+}
+
+#message {
+	color: white;
+    font-size: 18px;
+}
+
+#close {
+	float: right;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: default;
+}
+
+#product-desc {
+    display: flex;
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 1px solid lightgrey;
+    line-height: 1.8;
+}
+
+#product-desc-left {
+    flex: 0 1 40%;
+    padding: 1.5%;
+}
+
+#image-block {
+    border: 1px solid lightgrey;
+    padding: 3%;
+}
+
+#image-block img {
+    width: 60%;     
+}
+
+#buttons-block {
+    display: flex;    
+}
+
+#buttons-block button {
+    flex: 0 1 50%;
+    background-color: #6B8E23;
+    border: 2px solid white;
+    border-radius: 4px;
+    color: white;
+    width: 125px;
+    height: 50px;
+    margin: 0.75%;
+}
+
+#product-desc-right {
+    flex: 0 1 60%;
+    padding: 1.5%;
+}
+
+#product-desc-right .product-name {
+    font-weight: 700;
+}
+
+#product-desc-right .product-language {
+    color: grey;
+}
+
+#product-desc-right .product-price {
+    display: flex;
+}
+
+.product-price .discount-price {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.product-price .actual-price {
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+    margin-top: 0.1%;
+    color: gray;
+}
+
+.product-price .discount {
+    margin-top: 0.2%;
+    font-size: 16px;
+    color: #388e3c;
+}
+
+.label-value {
+    display: flex;
+    margin-top: 3%;
+}
+
+.label {
+    flex: 0 0 15%;
+}
+
+.value {
+	flex-grow: 1;
+}
+
+.value ul {
+    margin: 0;
+    padding: 0;
+    padding-left: 6%;
+}
+
+#description-value {
+	text-align: justify;
+}

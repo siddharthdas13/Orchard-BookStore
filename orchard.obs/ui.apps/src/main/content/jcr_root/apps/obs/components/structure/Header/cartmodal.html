@@ -168,7 +168,7 @@ $.fn.loadCartData = function(cartData, customerId) {
 
 		var Place_Order_Block = [
             '<div class="place-order-block">',
-                '<button onclick="$(this).placeOrder();">PLACE ORDER</button>',
+                '<button onclick="$(this).placeOrder(\'' + customerId + '\');">PLACE ORDER</button>',
             '</div>'
         ].join("\n");
 		$("#cart-block-first-block").append(Place_Order_Block);
@@ -233,8 +233,8 @@ $(window).click(function(e) {
     }
 });
 
-$.fn.placeOrder = function() {
-    window.location = "order.html";
+$.fn.placeOrder = function(customerId) {
+    window.location = "order.html?" + customerId;
 }
 </script>
 

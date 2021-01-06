@@ -1,4 +1,118 @@
-    #username,#password{
+#username, #password {
+	color: white;
+    margin-left: 12px;
+}
+
+#username:hover, #password:hover {
+    color: #FFD700;
+    margin-left: 12px;
+}
+
+#login {
+    background-image: url(/content/dam/obs/en/background/reading.jpg);
+  	background-repeat: no-repeat;
+  	background-position: center;
+  	background-size: cover;
+  	background-color: black;
+  	background-color: transparent;
+  	margin: auto;
+  	width: 350px;
+  	height: 375px;
+    border:2px solid white;
+}
+
+#login:hover {
+	background-color: black;
+    border: 1px solid #FFD700;
+}
+
+.name, .password {
+	color: white;
+    text-decoration-color: #FFD700;
+    width: 250px;
+    border-radius: 2px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid white;  
+    box-sizing: border-box;
+}
+
+#logheader {
+	color: white;
+    margin-left: 155px;
+}
+
+.underline {
+	background-color: white;
+  	height: 2px;
+  	left: 54px;
+  	margin-top: -4px;  
+  	top: 185px;       
+  	width: 20px;
+}
+
+#log-btn {
+	background-color: white;
+  	color: black;
+  	text-align: center;
+    padding: 10px;
+  	border: 1px solid black;
+  	font-size: 16px; 
+	margin-left: 152px;
+}
+
+#log-btn:hover {
+	background-color: black;
+    color: white;
+    border:1px solid #FFD700;
+}
+
+#reg-btn {
+    background-color: white;
+  	color: black;
+  	text-align: center;
+    padding: 10px;
+  	border: 1px solid black;
+  	font-size: 16px; 
+	margin-top: 20px;
+    cursor: pointer;
+}
+
+#reg-btn:hover {
+	background-color: black;
+    color: white;
+    border:1px solid #FFD700;
+}
+
+#fgt-pass {
+	margin-left: 120px;
+    margin-top: 30px;
+}
+
+#btn {
+	margin: auto;
+}
+
+.fa-user-check {
+	color: white;
+    font-size: 100px;
+    margin-left: 141px;
+}
+
+.fgt-text {
+	color: #FFD700;
+    text-decoration: none;
+}
+
+#error {
+	display: none;
+    color: red;
+}
+
+
+
+/*    #username,#password{
         color: white;
         margin-left: 12px;
     }
@@ -99,4 +213,4 @@ margin-left: 122px;
     .fgt-text{
         color: #FFD700;
         text-decoration: none;
-    }
+    } */

@@ -11,7 +11,7 @@
         border: 1px solid #FFD700;
     }
     #regheader{
-        margin-left: 65px;
+        margin-left: 25px;
         color: white;
         text-decoration: underline    
     }
@@ -121,7 +121,7 @@
         padding: 10px;
   border: 1px solid black;
   font-size: 16px; 
-margin-left: 252px;
+margin: auto;
         cursor: pointer;
     }
     #log-btn:hover{
